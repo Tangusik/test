@@ -1,0 +1,19 @@
+<h1>Вход</h1>
+
+
+<form action="{% url 'login' %}" method="post">
+    {% csrf_token %}
+
+    <p>
+        <input type="text" value="Логин" name="username" id="username">
+    </p>
+
+    <p>
+        <input type="text" value="Пароль" name="password" id="password">
+    </p>
+
+    <p>
+        <input type="submit" value="Войти">
+    </p>
+
+</form>
