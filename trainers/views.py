@@ -3,6 +3,7 @@ from .models import Client
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
+from django.shortcuts import get_object_or_404
 
 
 def login_page(request):
@@ -38,4 +39,17 @@ def main(request):
         return HttpResponseRedirect(reverse('login_page'))
 
 def clients(request):
-    pass
+    if request.user.is_authenticated:
+        clients = Client.objects.order_by('first_name')
+        context = {'clients': clients}
+        return render(request, "trainers/clients.html", context)
+    else:
+        return HttpResponseRedirect(reverse('login_page'))
+
+def client_info(request, client_id):
+    if request.user.is_authenticated:
+        client = get_object_or_404(Client, pk=client_id)
+        context = {'client': client}
+        return render(request, "trainers/clients_info.html", context)
+    else:
+        return HttpResponseRedirect(reverse('login_page'))
