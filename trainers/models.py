@@ -10,6 +10,8 @@ class Client(models.Model):
     birth_date = models.DateField(auto_now=False, blank=True, default=datetime.date(2023, 1, 1))
 
 
+
+
 class Address(models.Model):
     city = models.CharField(blank=False, default='123', max_length=30)
     street = models.CharField(blank=False, default='123', max_length=30)

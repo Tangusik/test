@@ -3,3 +3,10 @@
 <p> name: {{client.first_name}} </p>
 <p> surname: {{client.last_name}}</p>
 <p> birth_date: {{client.birth_date}}</p>
+
+<h2> Adresses </h2>
+
+
+{% for adres in adr %}
+<p> {{adres.city}}, {{adres.street}}, {{adres.house}}, {{adres.building}}, {{adres.flat}} </p>
+{% endfor %}

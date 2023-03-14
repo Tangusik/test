@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Client
+from .models import Client, Address
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
@@ -40,7 +40,7 @@ def main(request):
 
 def clients(request):
     if request.user.is_authenticated:
-        clients = Client.objects.order_by('first_name')
+        clients = Client.objects.all()
         context = {'clients': clients}
         return render(request, "trainers/clients.html", context)
     else:
@@ -49,7 +49,8 @@ def clients(request):
 def client_info(request, client_id):
     if request.user.is_authenticated:
         client = get_object_or_404(Client, pk=client_id)
-        context = {'client': client}
+        adr = client.address_set.all()
+        context = {'client': client, 'adr': adr}
         return render(request, "trainers/clients_info.html", context)
     else:
         return HttpResponseRedirect(reverse('login_page'))
