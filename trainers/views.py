@@ -54,3 +54,6 @@ def client_info(request, client_id):
         return render(request, "trainers/clients_info.html", context)
     else:
         return HttpResponseRedirect(reverse('login_page'))
+
+def client_add(request):
+    pass
