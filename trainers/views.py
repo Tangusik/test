@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Client, Address
+from .models import Client, Address, Team
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
@@ -56,4 +56,44 @@ def client_info(request, client_id):
         return HttpResponseRedirect(reverse('login_page'))
 
 def client_add(request):
-    pass
+    if request.user.is_authenticated:
+        return render(request, "trainers/client_add.html")
+    else:
+        return HttpResponseRedirect(reverse('login_page'))
+
+def client_add_action(request):
+    client_name = request.POST['client_name']
+    client_surname = request.POST['client_surname']
+    client_birthdate = request.POST['client_birthdate']
+    try:
+        Client.objects.create(first_name=client_name, last_name=client_surname, birth_date= client_birthdate)
+        return HttpResponseRedirect(reverse('client'))
+    except:
+        return HttpResponseRedirect(reverse('client_add'))
+
+def teams(request):
+    if request.user.is_authenticated():
+        teams = Team.objects.all()
+        context = {'teams': teams}
+        return render(request, "trainers/teams.html", context)
+    else:
+        return HttpResponseRedirect(reverse('login_page'))
+
+
+def team_add(request):
+    if request.user.is_authenticated():
+        client_list = Client.objects.all()
+        context = {'clients': client_list}
+        return render(request, "trainers/team_add.html", context)
+    else:
+        return HttpResponseRedirect(reverse('login_page'))
+
+def team_add_action(request):
+    team_name = request.POST['team_name']
+    weekday = request.POST.getlist('day')
+    try:
+        return HttpResponseRedirect(reverse('client'))
+    except:
+        return HttpResponseRedirect(reverse('client_add'))
+
+

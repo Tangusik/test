@@ -30,16 +30,12 @@ class Parents(models.Model):
 
 
 class Team(models.Model):
-    date_time = models.CharField(max_length=10, blank=False, default='01.01.2023')
-    members = models.ManyToManyField(Client, through='Membership')
+    name = models.CharField(max_length=20, )
+    members = models.ManyToManyField(Client)
 
-
-class Membership(models.Model):
-    team = models.ForeignKey(Team, on_delete=models.CASCADE)
-    client = models.ForeignKey(Client, on_delete=models.CASCADE)
 
 
 class Activity(models.Model):
     regular = models.BooleanField()
-    date_time = models.CharField(max_length=10, blank=False, default='01.01.2023')
-    place = models.CharField(blank=True, max_length=20)
+    group = models.ForeignKey(Team, on_delete=models.CASCADE)
+

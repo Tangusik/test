@@ -1,0 +1,13 @@
+<h1>Группы:</h1>
+
+{%if teams%}
+    <ul>
+        {% for team in teams %}
+        <li> {{team.name}} </a></li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>Нет групп</p>
+{%endif%}
+
+<p> <a href="{% url 'team_add' %}"> Создать группу </a> </p>

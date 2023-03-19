@@ -9,4 +9,10 @@ urlpatterns = [
     path('main', views.main, name='main'),
     path('client', views.clients, name='client'),
     path('client/<int:client_id>', views.client_info, name='client_info'),
+    path('client/add', views.client_add, name='client_add'),
+    path('client/add/action', views.client_add_action, name='client_add_action'),
+    path('teams', views.teams, name='teams'),
+    path('teams/add', views.teams, name='team_add'),
+    path('teams/add/action', views.teams, name='team_add_action'),
+
 ]
