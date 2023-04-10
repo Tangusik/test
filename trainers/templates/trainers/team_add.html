@@ -1,29 +1,19 @@
 <h1>Добавить группу</h1>
 
-<form action="{% url 'client_add_action' %}" method="post">
+<form action="{% url 'team_add_action' %}" method="post">
     {% csrf_token %}
     <p>Название группы:
     <input type="text" name="name"> </p>
 
-    <p>Дни недели:</p>
-        <p><input type="checkbox" name="day" value="Mon"> Пн </p>
-        <p><input type="checkbox" name="day" value="Tue"> Вт</p>
-        <p><input type="checkbox" name="day" value="Wed"> Ср</p>
-        <p><input type="checkbox" name="day" value="Thu"> Чт</p>
-        <p><input type="checkbox" name="day" value="Fri"> Пт</p>
-        <p><input type="checkbox" name="day" value="Sat"> Сб</p>
-        <p><input type="checkbox" name="day" value="Sun"> Вс</p>
-    </p>
 
     <p>Участники:</p>
     <p>
         <select multiple name="members">
             {% for client in clients %}
-            <option>{{client.first_name}} {{client.last_name}}</option>
+            <option value="{{client.id}}">{{client.first_name}} {{client.last_name}}</option>
             {% endfor %}
         </select>
     </p>
 
     <p><input type="submit" value="Отправить"></p>
 </form>
-

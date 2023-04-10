@@ -1,0 +1,14 @@
+<h1>Тренеры</h1>
+
+{% if trainers %}
+    <ul>
+        {% for trainer in trainers %}
+
+            <li> {{trainer.first_name}} {{trainer.last_name}}</li>
+
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No trainers sore </p>
+{% endif %}
+

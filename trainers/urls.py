@@ -12,7 +12,9 @@ urlpatterns = [
     path('client/add', views.client_add, name='client_add'),
     path('client/add/action', views.client_add_action, name='client_add_action'),
     path('teams', views.teams, name='teams'),
-    path('teams/add', views.teams, name='team_add'),
-    path('teams/add/action', views.teams, name='team_add_action'),
-
+    path('team/<int:team_id>', views.team_info, name='team_info'),
+    path('teams/add', views.team_add, name='team_add'),
+    path('teams/add/action', views.team_add_action, name='team_add_action'),
+    path('trainers', views.trainers, name='trainers'),
+    path('trainers', views.trainers_add, name='trainers_add'),
 ]

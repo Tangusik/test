@@ -28,14 +28,11 @@ class Parents(models.Model):
     email = models.CharField(blank=True, max_length=30)
     telephone = models.CharField(blank=True, max_length=30)
 
-
 class Team(models.Model):
-    name = models.CharField(max_length=20, )
-    members = models.ManyToManyField(Client)
+    name = models.CharField(max_length=20, default="qwerty")
+    clients = models.ManyToManyField(Client)
 
-
-
-class Activity(models.Model):
-    regular = models.BooleanField()
-    group = models.ForeignKey(Team, on_delete=models.CASCADE)
+class Trainer(User):
+    otchestv = models.CharField(blank=True, max_length=20)
+    birthdate = models.DateField(auto_now=False)
 

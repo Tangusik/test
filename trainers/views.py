@@ -1,7 +1,7 @@
 from django.shortcuts import render
-from .models import Client, Address, Team
+from .models import Client, Address, Team, Trainer
 from django.contrib.auth import authenticate, login, logout
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.shortcuts import get_object_or_404
 
@@ -29,7 +29,6 @@ def log_out(request):
     logout(request)
     return HttpResponseRedirect(reverse('login_page'))
 
-
 def main(request):
     if request.user.is_authenticated:
         userinfo = request.user
@@ -37,6 +36,7 @@ def main(request):
         return render(request, 'trainers/main.html', context)
     else:
         return HttpResponseRedirect(reverse('login_page'))
+
 
 def clients(request):
     if request.user.is_authenticated:
@@ -71,17 +71,27 @@ def client_add_action(request):
     except:
         return HttpResponseRedirect(reverse('client_add'))
 
+
 def teams(request):
-    if request.user.is_authenticated():
-        teams = Team.objects.all()
-        context = {'teams': teams}
+    if request.user.is_authenticated:
+        team_list = Team.objects.all()
+        context = {'teams': team_list}
         return render(request, "trainers/teams.html", context)
+    else:
+        return HttpResponseRedirect(reverse('login_page'))
+
+def team_info(request, team_id):
+    if request.user.is_authenticated:
+        team = get_object_or_404(Team, pk=team_id)
+        clients = team.clients.all()
+        context = {'team': team, 'clients': clients}
+        return render(request, "trainers/team_info.html", context)
     else:
         return HttpResponseRedirect(reverse('login_page'))
 
 
 def team_add(request):
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
         client_list = Client.objects.all()
         context = {'clients': client_list}
         return render(request, "trainers/team_add.html", context)
@@ -89,11 +99,28 @@ def team_add(request):
         return HttpResponseRedirect(reverse('login_page'))
 
 def team_add_action(request):
-    team_name = request.POST['team_name']
-    weekday = request.POST.getlist('day')
+    team_name = request.POST['name']
+    members = request.POST.getlist('members')
     try:
-        return HttpResponseRedirect(reverse('client'))
+        team = Team.objects.create(name=team_name)
+        for member in members:
+            mem = Client.objects.get(pk = member)
+            team.clients.add(mem)
+        return HttpResponseRedirect(reverse('teams'))
     except:
-        return HttpResponseRedirect(reverse('client_add'))
+        return HttpResponseRedirect(reverse('team_add'))
 
 
+def trainers(request):
+    if request.user.is_authenticated:
+        trainers = Trainer.objects.all()
+        context = {'trainers': trainers}
+        return render(request, "trainers/trainers.html", context)
+    else:
+        return HttpResponseRedirect(reverse('login_page'))
+
+def trainers_add(request):
+    if request.user.is_authenticated:
+        return render(request, "trainers/trainers_add.html")
+    else:
+        return HttpResponseRedirect(reverse('login_page'))
