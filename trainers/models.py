@@ -9,8 +9,9 @@ class Client(models.Model):
     reg_date = models.DateField(auto_now=True, blank=True)
     birth_date = models.DateField(auto_now=False, blank=True, default=datetime.date(2023, 1, 1))
 
-
-
+class Trainer(User):
+    otchestv = models.CharField(blank=True, max_length=20)
+    birthdate = models.DateField(auto_now=False)
 
 class Address(models.Model):
     city = models.CharField(blank=False, default='123', max_length=30)
@@ -31,8 +32,7 @@ class Parents(models.Model):
 class Team(models.Model):
     name = models.CharField(max_length=20, default="qwerty")
     clients = models.ManyToManyField(Client)
+    trainer = models.ForeignKey(Trainer, models.CASCADE, blank=True, null=True)
 
-class Trainer(User):
-    otchestv = models.CharField(blank=True, max_length=20)
-    birthdate = models.DateField(auto_now=False)
+
 

@@ -1,0 +1,12 @@
+<h1> Информация о тренере  </h1>
+
+<p> Имя тренера: {{team.name}}  </p>
+
+<p>участники группы:</p>
+
+<ul>
+{% for client in clients %}
+    <li><a href="{% url 'client' %}/{{client.id}}"> {{ client.first_name }} {{ client.last_name }}</li>
+
+{% endfor %}
+</ul>

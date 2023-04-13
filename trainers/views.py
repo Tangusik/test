@@ -124,3 +124,10 @@ def trainers_add(request):
         return render(request, "trainers/trainers_add.html")
     else:
         return HttpResponseRedirect(reverse('login_page'))
+
+
+def trainers_add_action(request):
+    trainer_username = request.POST['name']
+    trainer_email = request.POST['name']
+    trainer_pass = request.POST['name']
+    trainer_name = request.POST['name']
