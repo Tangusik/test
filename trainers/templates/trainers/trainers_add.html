@@ -1,21 +1,24 @@
 <h1>Добавить тренера</h1>
 
-<form action="{% url 'team_add_action' %}" method="post">
+<form action="{% url 'trainers_add_action' %}" method="post">
     {% csrf_token %}
     <p>Имя:
     <input type="text" name="name"> </p>
 
     <p>Фамилия:
-    <input type="text" name="name"> </p>
+    <input type="text" name="last_name"> </p>
 
     <p>Отчество:
-    <input type="text" name="name"> </p>
+    <input type="text" name="otchestv"> </p>
 
     <p>Электронная почта:
-    <input type="text" name="name"> </p>
+    <input type="text" name="mail"> </p>
 
     <p>Дата рождения:
-    <input type="text" name="name"> </p>
+    <input type="date" name="birth_date"> </p>
+
+    <p>Пароль:
+    <input type="text" name="password"> </p>
 
 
     <p><input type="submit" value="Отправить"></p>

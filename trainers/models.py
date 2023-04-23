@@ -9,7 +9,8 @@ class Client(models.Model):
     reg_date = models.DateField(auto_now=True, blank=True)
     birth_date = models.DateField(auto_now=False, blank=True, default=datetime.date(2023, 1, 1))
 
-class Trainer(User):
+class Trainer(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     otchestv = models.CharField(blank=True, max_length=20)
     birthdate = models.DateField(auto_now=False)
 
@@ -34,5 +35,12 @@ class Team(models.Model):
     clients = models.ManyToManyField(Client)
     trainer = models.ForeignKey(Trainer, models.CASCADE, blank=True, null=True)
 
+class Activity(models.Model):
+    act_date = models.DateField(auto_now=False, blank=False)
+    act_time_begin = models.TimeField(auto_now=False)
+    act_time_end = models.TimeField(auto_now=False)
+    clients = models.ManyToManyField(Client)
+    trainer = models.ForeignKey(Trainer, on_delete=models.DO_NOTHING)
+    status = models.CharField(False, max_length=20, default='Состоится')
 
 

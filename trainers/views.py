@@ -1,17 +1,19 @@
+import datetime
+
 from django.shortcuts import render
-from .models import Client, Address, Team, Trainer
+from .models import Client, Address, Team, Trainer, Activity
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.shortcuts import get_object_or_404
 
 
 def login_page(request):
-    if  request.user.is_authenticated:
+    if request.user.is_authenticated:
         return HttpResponseRedirect(reverse('main'))
     else:
         return render(request, 'trainers/login.html')
-
 
 
 def log_in(request):
@@ -28,6 +30,7 @@ def log_in(request):
 def log_out(request):
     logout(request)
     return HttpResponseRedirect(reverse('login_page'))
+
 
 def main(request):
     if request.user.is_authenticated:
@@ -46,6 +49,7 @@ def clients(request):
     else:
         return HttpResponseRedirect(reverse('login_page'))
 
+
 def client_info(request, client_id):
     if request.user.is_authenticated:
         client = get_object_or_404(Client, pk=client_id)
@@ -55,18 +59,20 @@ def client_info(request, client_id):
     else:
         return HttpResponseRedirect(reverse('login_page'))
 
+
 def client_add(request):
     if request.user.is_authenticated:
         return render(request, "trainers/client_add.html")
     else:
         return HttpResponseRedirect(reverse('login_page'))
 
+
 def client_add_action(request):
     client_name = request.POST['client_name']
     client_surname = request.POST['client_surname']
     client_birthdate = request.POST['client_birthdate']
     try:
-        Client.objects.create(first_name=client_name, last_name=client_surname, birth_date= client_birthdate)
+        Client.objects.create(first_name=client_name, last_name=client_surname, birth_date=client_birthdate)
         return HttpResponseRedirect(reverse('client'))
     except:
         return HttpResponseRedirect(reverse('client_add'))
@@ -79,6 +85,7 @@ def teams(request):
         return render(request, "trainers/teams.html", context)
     else:
         return HttpResponseRedirect(reverse('login_page'))
+
 
 def team_info(request, team_id):
     if request.user.is_authenticated:
@@ -93,20 +100,38 @@ def team_info(request, team_id):
 def team_add(request):
     if request.user.is_authenticated:
         client_list = Client.objects.all()
-        context = {'clients': client_list}
+        trainer_list = Trainer.objects.all()
+        context = {'clients': client_list, 'trainers': trainer_list}
         return render(request, "trainers/team_add.html", context)
     else:
         return HttpResponseRedirect(reverse('login_page'))
 
+
 def team_add_action(request):
     team_name = request.POST['name']
     members = request.POST.getlist('members')
+    trainer = request.POST['trainer']
+    date_end = request.POST.['date_end']
+    days = request.POST.getlist('days')
+    act_begin_time = request.POST['act_begin_time']
+    act_end_time = request.POST['act_begin_time']
     try:
-        team = Team.objects.create(name=team_name)
-        for member in members:
-            mem = Client.objects.get(pk = member)
-            team.clients.add(mem)
+        for day in days:
+            day = int(day)
+
+        tr= get_object_or_404(Trainer, pk=trainer)
+        team = Team.objects.create(name=team_name, trainer = tr)
+        for client in members:
+            team.clients.add(client)
         return HttpResponseRedirect(reverse('teams'))
+    date = datetime.today()
+    while date != date_end:
+        if date.weekday() in days:
+            act = Activity(act_date = date, act_time_begin =act_begin_time, act_time_end=act_end_time)
+            for client in members:
+                act.clients.add(client)
+        date = date + datetime.timedelta(days=1)
+
     except:
         return HttpResponseRedirect(reverse('team_add'))
 
@@ -119,6 +144,7 @@ def trainers(request):
     else:
         return HttpResponseRedirect(reverse('login_page'))
 
+
 def trainers_add(request):
     if request.user.is_authenticated:
         return render(request, "trainers/trainers_add.html")
@@ -127,7 +153,29 @@ def trainers_add(request):
 
 
 def trainers_add_action(request):
-    trainer_username = request.POST['name']
-    trainer_email = request.POST['name']
-    trainer_pass = request.POST['name']
     trainer_name = request.POST['name']
+    trainer_last_name = request.POST['last_name']
+    trainer_otchestv = request.POST['otchestv']
+    trainer_mail = request.POST['mail']
+    trainer_pass = request.POST['password']
+    trainer_birthdate = request.POST['birth_date']
+    try:
+        user = User.objects.create_user(username=trainer_mail, email=trainer_mail, password=trainer_pass)
+        user.last_name = trainer_last_name
+        user.first_name = trainer_name
+        user.save()
+        trainer = Trainer(user=user, otchestv=trainer_otchestv, birthdate=trainer_birthdate)
+        trainer.save()
+        return HttpResponseRedirect(reverse('trainers'))
+    except:
+        return HttpResponseRedirect(reverse('trainers_add'))
+
+
+def trainer_info(request, trainer_id):
+    if request.user.is_authenticated:
+        trainer = get_object_or_404(Trainer, pk=trainer_id)
+        team_list = Team.objects.filter()
+        context = {'trainer': trainer, 'teams': team_list}
+        return render(request, "trainers/trainer_info.html", context)
+    else:
+        return HttpResponseRedirect(reverse('login_page'))
