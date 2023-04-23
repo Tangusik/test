@@ -1,4 +1,4 @@
-import datetime
+import datetime, calendar
 
 from django.shortcuts import render
 from .models import Client, Address, Team, Trainer, Activity
@@ -111,10 +111,10 @@ def team_add_action(request):
     team_name = request.POST['name']
     members = request.POST.getlist('members')
     trainer = request.POST['trainer']
-    date_end = request.POST.['date_end']
+    date_end = request.POST['date_end']
     days = request.POST.getlist('days')
     act_begin_time = request.POST['act_begin_time']
-    act_end_time = request.POST['act_begin_time']
+    act_end_time = request.POST['act_end_time']
     try:
         for day in days:
             day = int(day)
@@ -123,14 +123,19 @@ def team_add_action(request):
         team = Team.objects.create(name=team_name, trainer = tr)
         for client in members:
             team.clients.add(client)
+
+        date = datetime.date.today()
+
+        while date != date_end:
+            if date.weekday() in days:
+                act = Activity(act_date = date, act_time_begin =act_begin_time, act_time_end=act_end_time)
+                act.save()
+                for client in members:
+                    act.clients.add(client)
+                    act.save()
+                date = date + datetime.timedelta(days=1)
+
         return HttpResponseRedirect(reverse('teams'))
-    date = datetime.today()
-    while date != date_end:
-        if date.weekday() in days:
-            act = Activity(act_date = date, act_time_begin =act_begin_time, act_time_end=act_end_time)
-            for client in members:
-                act.clients.add(client)
-        date = date + datetime.timedelta(days=1)
 
     except:
         return HttpResponseRedirect(reverse('team_add'))
@@ -177,5 +182,13 @@ def trainer_info(request, trainer_id):
         team_list = Team.objects.filter()
         context = {'trainer': trainer, 'teams': team_list}
         return render(request, "trainers/trainer_info.html", context)
+    else:
+        return HttpResponseRedirect(reverse('login_page'))
+
+def activity(request):
+    if request.user.is_authenticated:
+        activity_list = Activity.objects.all()
+        context = {'activities': activity_list}
+        return render(request, "trainers/activities.html", context)
     else:
         return HttpResponseRedirect(reverse('login_page'))
