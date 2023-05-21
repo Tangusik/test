@@ -1,2 +1,12 @@
 <h1>Занятия</h1>
 
+{%if acts%}
+    <ul>
+        {% for act in acts %}
+        <li> <a href="activities/{{act.id}}"> {{act.act_date}}: {{act.act_time_begin}}-{{act.act_time_end}} </a></li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>Занятий пока нет</p>
+{%endif%}
+

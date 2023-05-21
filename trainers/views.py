@@ -115,28 +115,29 @@ def team_add_action(request):
     days = request.POST.getlist('days')
     act_begin_time = request.POST['act_begin_time']
     act_end_time = request.POST['act_end_time']
+    price = request.POST['price']
     try:
-        for day in days:
-            day = int(day)
-
         tr= get_object_or_404(Trainer, pk=trainer)
         team = Team.objects.create(name=team_name, trainer = tr)
         for client in members:
             team.clients.add(client)
 
-        date = datetime.date.today()
+        date1 = datetime.date.today()
+        date2 = datetime.datetime.strptime(date_end, '%Y-%m-%d')
 
-        while date != date_end:
-            if date.weekday() in days:
-                act = Activity(act_date = date, act_time_begin =act_begin_time, act_time_end=act_end_time)
+
+
+        while date1 <= date2.date():
+            if str(date1.weekday()) in days:
+                act = Activity(act_date = date1, act_time_begin =act_begin_time,
+                               act_time_end=act_end_time, trainer = tr, price=price)
                 act.save()
                 for client in members:
                     act.clients.add(client)
-                    act.save()
-                date = date + datetime.timedelta(days=1)
+                act.save()
+            date1 = date1 + datetime.timedelta(days=1)
 
         return HttpResponseRedirect(reverse('teams'))
-
     except:
         return HttpResponseRedirect(reverse('team_add'))
 
@@ -188,7 +189,35 @@ def trainer_info(request, trainer_id):
 def activity(request):
     if request.user.is_authenticated:
         activity_list = Activity.objects.all()
-        context = {'activities': activity_list}
+        context = {'acts': activity_list}
         return render(request, "trainers/activities.html", context)
     else:
         return HttpResponseRedirect(reverse('login_page'))
+
+def activity_info(request, activity_id):
+    if request.user.is_authenticated:
+        act = get_object_or_404(Activity, pk=activity_id)
+        clients = act.clients.all()
+        context = {'act': act, 'clients': clients}
+        return render(request, "trainers/act_info.html", context)
+    else:
+        return HttpResponseRedirect(reverse('login_page'))
+
+def activity_change(request, activity_id):
+    status = request.POST['status']
+    client_who_was = request.POST.getlist('client')
+    act = get_object_or_404(Activity, pk=activity_id)
+    try:
+        if status == "Состоится":
+            for id in client_who_was:
+                client = get_object_or_404(Client, pk=id)
+                client.balance = client.balance - act.price
+                client.save()
+            act.status = status
+            act.save()
+        elif status == "Отменено":
+            act.status = status
+            act.save()
+        return HttpResponseRedirect(reverse('activity'))
+    except:
+        return HttpResponseRedirect(reverse('activity'))

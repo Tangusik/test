@@ -4,6 +4,7 @@ import datetime
 
 
 class Client(models.Model):
+    balance = models.IntegerField(blank=False, default=0)
     first_name = models.CharField(blank=False, max_length=30, default='qwerty')
     last_name = models.CharField(blank=True, max_length=30)
     reg_date = models.DateField(auto_now=True, blank=True)
@@ -36,11 +37,12 @@ class Team(models.Model):
     trainer = models.ForeignKey(Trainer, models.CASCADE, blank=True, null=True)
 
 class Activity(models.Model):
+    price = models.IntegerField(blank=False, default=0)
     act_date = models.DateField(auto_now=False, blank=False)
     act_time_begin = models.TimeField(auto_now=False)
     act_time_end = models.TimeField(auto_now=False)
     clients = models.ManyToManyField(Client)
     trainer = models.ForeignKey(Trainer, on_delete=models.DO_NOTHING)
-    status = models.CharField(False, max_length=20, default='Состоится')
+    status = models.CharField(max_length=20, default="Состоится")
 
 
