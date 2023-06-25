@@ -1,25 +1,45 @@
  {% extends 'trainers/base.html' %}
- {% load static %}
+
+   {% block head %}
+     <link rel="stylesheet" href="../../../static/css/form.css">
+    {% endblock %}
 
   {% block content %}
-<h1>Добавить клиента</h1>
-
-<form action="{% url 'client_add_action' %}" method="post">
-    {% csrf_token %}
-    <p>Имя:
-        <input type="text" name="client_name" id="client_name">
-    </p>
-
-    <p>Famil:
-        <input type="text" name="client_surname" id="client_surname">
-    </p>
-
-    <p>Дата рождения:
-        <input type="date" name="client_birthdate" id="client_birthdate">
-    </p>
-
-    <p>
-        <input type="submit" value="Создать">
-    </p>
-</form>
+  <div id="form">
+    <form id="sch" class="decor" action="{% url 'client_add_action' %}">
+        <div class="form-left-decoration"></div>
+        <div class="form-right-decoration"></div>
+        <div class="circle"></div>
+        <div class="form-inner">
+            <h3>Добавление клиента</h3>
+            <input type="text" id="name" placeholder="Имя">
+            <input type="text" id="last_name" placeholder="Фамилия">
+            <input type="text" id="dady_name" placeholder="Отчество">
+            <input type="text" id="email" placeholder="Почта">
+            <input type="date" id="birthday" placeholder="Дата рождения">
+            <textarea id="note" placeholder="Примечание..." rows="3"></textarea>
+            <input type="submit" id="sub" value="Добавить" onclick="addClient()">
+        </div>
+    </form>
+</div>
     {% endblock %}
+<!--<form action="{% url 'client_add_action' %}" method="post">-->
+<!--    {% csrf_token %}-->
+<!--    <p>Имя:-->
+<!--        <input type="text" name="client_name" id="client_name">-->
+<!--    </p>-->
+
+<!--    <p>Famil:-->
+<!--        <input type="text" name="client_surname" id="client_surname">-->
+<!--    </p>-->
+
+<!--    <p>Дата рождения:-->
+<!--        <input type="date" name="client_birthdate" id="client_birthdate">-->
+<!--    </p>-->
+
+<!--    <p>-->
+<!--        <input type="submit" value="Создать">-->
+<!--    </p>-->
+<!--</form>-->
+
+
