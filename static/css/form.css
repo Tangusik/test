@@ -1,0 +1,117 @@
+#form{
+    background-color: rgb(152, 193, 217, 0.7);;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.decor {
+    position: relative;
+    max-width: 400px;
+    margin: 50px auto 0;
+    background:  #3D5A80;
+    border-radius: 30px;
+}
+
+.form-left-decoration, .form-right-decoration {
+    content: "";
+    position: absolute;
+    width: 50px;
+    height: 18px;
+    background: #f69a73;
+    border-radius: 20px;
+}
+.form-left-decoration {
+    bottom: 60px;
+    left: -30px;
+}
+.form-right-decoration {
+    top: 60px;
+    right: -30px;
+}
+.form-left-decoration:before, .form-left-decoration:after, .form-right-decoration:before, .form-right-decoration:after {
+    content: "";
+    position: absolute;
+    width: 50px;
+    height: 18px;
+    border-radius: 30px;
+    background: #98C1D9;
+
+}
+.form-left-decoration:before {
+    top: -20px;
+}
+.form-left-decoration:after {
+    top: 20px;
+    left: 10px;
+}
+.form-right-decoration:before {
+    top: -20px;
+    right: 0;
+}
+.form-right-decoration:after {
+    top: 20px;
+    right: 10px;
+}
+.circle {
+    position: absolute;
+    bottom: 80px;
+    left: -55px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #d87d56;
+}
+.form-inner {
+    padding: 50px;
+}
+.form-inner input, .form-inner textarea {
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    padding: 0 20px;
+    margin-bottom: 10px;
+    background: #dddddd;
+    line-height: 40px;
+    border-width: 0;
+    border-radius: 20px;
+    font-family: 'Roboto', sans-serif;
+    align-items: center;
+    color: #3D5A80;
+}
+
+input:focus, textarea:focus{
+    outline: none;
+}
+
+.form-inner input[type="submit"] {
+    margin-top: 30px;
+    background: #f69a73;
+    border-bottom: 4px solid #d87d56;
+    color: white;
+    font-size: 14px;
+}
+.form-inner textarea {
+    resize: none;
+}
+.form-inner h3 {
+    margin-top: 0;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 24px;
+    color: #dddddd;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+
+input::-webkit-calendar-picker-indicator {
+   opacity: 0;
+
+}
+
+input::-webkit-datetime-edit-day-field:focus,
+input::-webkit-datetime-edit-month-field:focus,
+input::-webkit-datetime-edit-year-field:focus {
+    background-color: #f69a73;
+    color: black;
+}

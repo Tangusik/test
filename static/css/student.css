@@ -1,0 +1,146 @@
+#student_page {
+    overflow: hidden;
+    display: flex;
+    width: 100%;
+}
+
+.side {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    flex: 30%;
+    background-color: #d87d56;
+    width: 100%;
+}
+
+.main {
+    overflow: hidden;
+    background-color: #F1FFFF;
+    flex: 70%;
+    width: 100%;
+}
+
+/*ГЛАВНАЯ ПРО СТУДЕНТА*/
+#student_data {
+    color: #dddddd;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+#student_data > * {
+    margin-bottom: 1em;
+}
+
+.photo {
+    margin-top: 2vw;
+    margin-bottom: 2vw;
+    margin-right: 0;
+    background: url(../img/sofa.jpg) no-repeat -100px;
+    border-radius: 50%;
+    background-size: auto 15em;
+    overflow: hidden;
+    width: 15em;
+    height: 15em;
+}
+
+.photo img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+
+@media screen and (max-width: 950px) {
+    #student_page {
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .photo {
+        width: 250px;
+        height: 250px;
+        border-radius: 50%;
+        background: url(../img/sofa.jpg) no-repeat -100px;
+        background-size: auto 250px;
+    }
+}
+
+
+
+/*НАВЫКИ*/
+#skills {
+    background-color: #3D5A80;
+    padding-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+#skills h3 {
+    text-align: center;
+    color: #dddddd;
+    margin-bottom: 30px;
+}
+
+#skills p {
+    color: #dddddd;
+    margin-bottom: 5px;
+}
+
+.container_skills {
+    width: 50vw;
+    background-color: #ddd;
+    margin-bottom: 30px;
+}
+
+.skills {
+    text-align: right;
+    padding-top: 1vw;
+    padding-bottom: 1vw;
+    color: white;
+    padding-right: 5px;
+}
+
+.html {
+    width: 90%;
+    background-color: #d87d56;
+}
+
+.css {
+    width: 80%;
+    background-color: #EE6C4D;
+}
+
+.js {
+    width: 65%;
+    background-color: #d87d56;
+}
+
+.php {
+    width: 60%;
+    background-color: #EE6C4D;
+}
+
+@media screen and (max-width: 950px) {
+    .container_skills {
+        width: 90vw;
+    }
+}
+
+
+.ecip{
+    background-color: #d87d56;
+    padding-left: 2em;
+    padding-right: 2em;
+}
+.ecip h3, .ecip h4{
+    color: #3c3c3c;
+}

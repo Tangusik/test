@@ -1,0 +1,93 @@
+#cards h1::before{
+    content: '';
+    position: absolute;
+    left: 30px;
+    bottom: 15px;
+    background-color: #EE6C4D;
+    height: 3px;
+    box-sizing: border-box;
+    width: 80px;
+}
+
+#cards {
+    background-color: rgb(152, 193, 217, 0.7);
+    height: 100%;
+}
+
+#my_students {
+    padding-top: 50px;
+    text-align: center;
+    margin-bottom: 100px;
+    color: #293241;
+}
+
+.cards_elements{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin-bottom: 120px;
+}
+
+.card {
+    flex-basis: calc(33.33% - 10px);
+    max-width: 300px;
+    margin: 45px 70px;
+    width: calc((100% - 1200px) / 2);
+    height: 600px;
+    cursor: pointer;
+    transform: translate(-15%, 16%);
+    border-radius: 30px;
+    z-index: 5;
+}
+
+
+.card:hover .front {
+    transform: perspective(1200px) rotateY(-180deg);
+}
+
+.card:hover .back {
+    transform: perspective(1200px) rotateY(0);
+}
+
+.front,
+.back {
+    padding: 20px 60px 20px;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: absolute;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transition: transform 0.9s ease;
+    border-radius: 10px;
+    background-color: #3D5A80;
+}
+
+.front {
+    transform: perspective(1200px) rotateY(0);
+}
+
+.back {
+    transform: perspective(1200px) rotateY(180deg);
+}
+
+.card p{
+    color: #dddddd;
+    margin-bottom: 20px;
+}
+.card h1{
+    color: #F1FFFF;
+    margin-bottom: 50px;
+}
+
+summary{
+    color: #3c3c3c;
+    padding-left: 20px;
+    margin-top: 20px;
+    margin-left: 50px;
+    font-size: 20px;
+    list-style: none;
+}
+

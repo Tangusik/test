@@ -1,0 +1,95 @@
+
+/*КОНТЕЙНЕРЫ ОБЩЕЕ*/
+.container {
+    width: 100%;
+    height: 20em;
+    background-color: #F1FFFF;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-text{
+    padding-right: 2em;
+    margin-left: 2em;
+}
+
+.container-text h4 {
+    color: #293241;
+}
+
+.container-text h3 {
+    margin-bottom: 1em;
+    color: #293241;
+}
+
+.container-text ul li a{
+    color: #293241;
+    display: none;
+}
+
+
+@media (max-width:1000px) {
+    .rectangle{
+        display: none;
+    }
+
+    .container {
+        height: 15em;
+    }
+
+    .container-text{
+        text-align: center;
+    }
+
+    .link {
+        display: none;
+    }
+
+    .container-text ul li a{
+        display: block;
+    }
+
+}
+
+/*!*ПРЯМОУГОЛЬНИКИ*!*/
+.rectangle {
+    text-align: center;
+    overflow: hidden;
+    height: 12em;
+    width: 10em;
+    border-radius: 2em;
+}
+
+.rectangle-left {
+    background-color: #98C1D9;
+    transform: rotate(-18deg);
+}
+
+.rectangle-right {
+    transform: rotate(18deg);
+    margin-left: 13em;
+
+}
+
+.rectangle-front {
+    color: #dddddd;
+    background-color: #3D5A80;
+    margin-top: -10em;
+}
+
+.rectangle-back{
+    margin-left: 7em;
+    margin-right: 5em;
+    background-color: #98C1D9;
+}
+
+.rectangle-back h2 , .rectangle-back h1{
+    color: #3D5A80;
+
+}
+
+.rectangle-front h2, .rectangle-front h1{
+    color: #dddddd;
+}

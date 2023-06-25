@@ -1,0 +1,94 @@
+h1{
+    margin: 20px auto 0;
+    width: 200px;
+    text-align: center;
+    color: #3D5A80;
+}
+
+#wrapper{
+    position: absolute;
+    width: 320px;
+    left: 50%;
+    margin-left: -160px;
+    top: 50%;
+    margin-top: -75px;
+}
+
+
+#signin {
+    height: 90px;
+    width: 300px;
+    border-radius: 8px;
+    position: relative;
+}
+
+#signin::before {
+    display: block;
+    position: relative;
+    height: 2px;
+    content: '';
+    top: 44px;
+    margin-left: 20px;
+    z-index: 1;
+}
+
+#signin input:first-of-type{
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+}
+
+#signin input:last-of-type{
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+#signin  input[type="text"], #signin  input[type="password"]{
+    position: relative;
+    display: block;
+    width: 280px;
+    height: 80px;
+    border: 0;
+    outline: 0;
+    top: -2px;
+    padding: 0 0 0 20px;
+    font-weight: 700;
+    background-color: #3D5A80;
+    color: white;
+    font-size: 15px;
+}
+
+#user::placeholder,
+#pass::placeholder {
+    color: #3D5A80;
+}
+
+#signin button[type="submit"]{
+    display: block;
+    position: absolute;
+    width: 52px;
+    height: 52px;
+    border-radius: 50px;
+    outline: 0;
+    z-index: 2;
+    top: 19px;
+    right: -24px;
+    font-size: 25px;
+    text-indent: 0px;
+    padding-left: 9px;
+    padding-bottom: 3px;
+    text-align: center;
+    background-color: rgb(227, 227, 227);
+}
+
+#signin button[type="submit"]:hover{
+    cursor: pointer;
+}
+
+#signin a {
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 18px;
+    color: #293241;
+}
+
+

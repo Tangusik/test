@@ -1,19 +1,41 @@
-<h1>Вход</h1>
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>crm</title>
+  <link rel="stylesheet" href="../../../static/css/enter.css">
+</head>
+
+<body>
+<h1>Sign In</h1>
+
+<div id="wrapper">
+  <form id="signin" action="{% url 'login' %}" autocomplete="off">
+    <input type="text" id="user" name="user" placeholder="username" required>
+    <input type="password" id="pass" name="pass" placeholder="password" required>
+    <button type="submit">&#129453;</button>
+    <a href="#">Забыли пароль? </a>
+  </form>
+
+</div>
+</body>
+</html>
 
 
-<form action="{% url 'login' %}" method="post">
-    {% csrf_token %}
+<!--<form action="{% url 'login' %}" method="post">-->
+<!--    {% csrf_token %}-->
 
-    <p>
-        <input type="text" value="Логин" name="username" id="username">
-    </p>
+<!--    <p>-->
+<!--        <input type="text" value="Логин" name="username" id="username">-->
+<!--    </p>-->
 
-    <p>
-        <input type="text" value="Пароль" name="password" id="password">
-    </p>
+<!--    <p>-->
+<!--        <input type="text" value="Пароль" name="password" id="password">-->
+<!--    </p>-->
 
-    <p>
-        <input type="submit" value="Войти">
-    </p>
+<!--    <p>-->
+<!--        <input type="submit" value="Войти">-->
+<!--    </p>-->
 
-</form>
+<!--</form>-->

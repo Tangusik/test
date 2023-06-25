@@ -1,3 +1,7 @@
+ {% extends 'trainers/base.html' %}
+ {% load static %}
+
+  {% block content %}
 <h1>Добавить клиента</h1>
 
 <form action="{% url 'client_add_action' %}" method="post">
@@ -6,7 +10,7 @@
         <input type="text" name="client_name" id="client_name">
     </p>
 
-    <p>Фамилия:
+    <p>Famil:
         <input type="text" name="client_surname" id="client_surname">
     </p>
 
@@ -18,3 +22,4 @@
         <input type="submit" value="Создать">
     </p>
 </form>
+    {% endblock %}

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../../static/css/common.css">
+    {% block head %}
+    {% endblock %}
+</head>
+<body>
+<header>
+    <div class="nav">
+        <div class="text">
+            <p>Nachos are</p>
+            <p>
+                <span class="word wisteria">tasty.</span>
+                <span class="word belize">wonderful.</span>
+                <span class="word pomegranate">fancy.</span>
+                <span class="word green">beautiful.</span>
+                <span class="word midnight">cheap.</span>
+            </p>
+        </div>
+        <div class="container_header">
+            <a href="{% url 'client' %}">Список Учеников</a>
+            <a href="calendar.html">Расписание</a>
+            <a href="{% url 'main' %}">Главная</a>
+        </div>
+        <form action="{% url 'logout' %}">
+    <input type="submit" value="Выйти">
+</form>
+    </div>
+</header>
+  {% block content %}
+  {% endblock %}
+
+<footer id="footer">
+    <div class="nav_footer">
+        <div class="footer-col">
+            <h4>О нас</h4>
+        </div>
+        <div class="footer-col">
+            <h4>Документация</h4>
+            <div class="social-links">
+                <a href="https://vk.com/pies_descalzos">ВК</a>
+                <a href="https://github.com/LosPiesDescalzos">Git</a>
+            </div>
+        </div>
+        <div class="footer-col">
+            <h4>Что-то еще</h4>
+        </div>
+    </div>
+</footer>
+
+<section id="copy-right">
+    <div class="copy-right-sec"><i class="fa-solid fa-copyright"></i>
+        С любовью для вас команда <a href="#">Команда.Название</a>
+    </div>
+</section>
+
+  {% block js%}
+  {% endblock %}
+
+</body>
+</html>

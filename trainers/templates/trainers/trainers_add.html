@@ -1,3 +1,8 @@
+{% extends 'trainers/base.html' %}
+
+  {% block content %}
+
+
 <h1>Добавить тренера</h1>
 
 <form action="{% url 'trainers_add_action' %}" method="post">
@@ -23,3 +28,4 @@
 
     <p><input type="submit" value="Отправить"></p>
 </form>
+  {% endblock %}
