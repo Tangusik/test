@@ -45,7 +45,7 @@ def clients(request):
     if request.user.is_authenticated:
         clients = Client.objects.all()
         context = {'clients': clients}
-        return render(request, "trainers/clients.html", context)
+        return render(request, "trainers/client.html", context)
     else:
         return HttpResponseRedirect(reverse('login_page'))
 
@@ -80,8 +80,9 @@ def client_add_action(request):
 
 def teams(request):
     if request.user.is_authenticated:
+        clients = Client.objects.all()
         team_list = Team.objects.all()
-        context = {'teams': team_list}
+        context = {'teams': team_list, 'clients': clients}
         return render(request, "trainers/teams.html", context)
     else:
         return HttpResponseRedirect(reverse('login_page'))
