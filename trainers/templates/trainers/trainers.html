@@ -13,35 +13,39 @@
         {% for trainer in trainers %}
         <div class="card">
             <div class="front">
-                <p>Студент.ДеньРождения</p>
+                <p> {{trainer.birthdate}}</p>
                 <h1>
-                    {{trainer.user.first_name}} {{trainer.user.last_name}}
+                    {{trainer.user.last_name}} {{trainer.user.first_name}} {{trainer.otchestv}}
                 </h1>
-                <p>Студент.Описание
+                <p> Какое-нить описание
                 </p>
             </div>
             <div class="back">
-                <p>Студент.ДеньРождения</p>
+                <p> {{trainer.birthdate}}</p>
                 <h1>
-                    {{trainer.user.first_name}} {{trainer.user.last_name}}
+                    {{trainer.user.last_name}} {{trainer.user.first_name}} {{trainer.otchestv}}
                 </h1>
-                <p><a href="trainers/{{trainer.user.id}}">Студент.Ссылка</a></p>
+                <p> {% if trainer.team_set.all  %}
+                <ul>
+                    {% for team in trainer.team_set.all %}
+                    <li> <a href="{% url 'teams' %}/{{team.id}}">{{ team.name }} </a></li>
+                    {% endfor %}
+                </ul>
+
+                {% else %}
+                <p>У тренера ещё нет групп.</p>
+                {% endif %}
+                </p>
             </div>
         </div>
         {% endfor %}
         {% else %}
-        <p>No clients</p>
+        <p>Коллег нет :(</p>
         {%endif%}
     </div>
 </div>
 
 {% endblock %}
-
-
-
-
-
-
 
 
 <!--БЫЛО ДО-->

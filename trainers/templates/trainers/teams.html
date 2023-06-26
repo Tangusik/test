@@ -7,17 +7,16 @@
 {% block content %}
 
 <div id="cards">
-    <h2 id="my_students">Мои ученики</h2>
+    <h2 id="my_students">ВСЕ ученики</h2>
     {%if teams%}
     {% for team in teams %}
     <details>
-        <summary>{{team.id}} {{team.name}}</summary>
+        <summary>{{team.name}}</summary>
         <div class="cards_elements">
-            {%if clients%}
-            {% for client in clients %}
+            {% for client in team.clients.all %}
             <div class="card">
                 <div class="front">
-                    <p>Студент.ДеньРождения</p>
+                    <p>{{client.birth_date}}</p>
                     <h1>
                         {{client.first_name}} {{client.last_name}}
                     </h1>
@@ -25,7 +24,7 @@
                     </p>
                 </div>
                 <div class="back">
-                    <p>Студент.ДеньРождения</p>
+                    <p>{{client.birth_date}}</p>
                     <h1>
                         {{client.first_name}} {{client.last_name}}
                     </h1>
@@ -33,9 +32,6 @@
                 </div>
             </div>
             {% endfor %}
-            {% else %}
-            <p>No clients</p>
-            {%endif%}
         </div>
     </details>
 
@@ -49,6 +45,22 @@
     <div class="add_group" ><a href="{% url 'team_add' %}"> Создать группу </a></div>
 </div>
 
+
+
+<!--    <ul>-->
+<!--{% for team in teams %}-->
+<!--    <li>{{ team.name }}</li>-->
+<!--    <ul>-->
+<!--    {% for client in team.clients.all %}-->
+<!--        <li>{{ client.first_name }} {{ client.last_name }}</li>-->
+<!--    {% empty %}-->
+<!--        <li>Нет учеников</li>-->
+<!--    {% endfor %}-->
+<!--    </ul>-->
+<!--{% empty %}-->
+<!--    <li>Нет групп</li>-->
+<!--{% endfor %}-->
+<!--</ul>-->
 
 {% endblock %}
 

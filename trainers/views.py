@@ -34,8 +34,14 @@ def log_out(request):
 
 def main(request):
     if request.user.is_authenticated:
-        userinfo = request.user
-        context = {'userinfo': userinfo}
+        user = request.user
+        try:
+            trainer = Trainer.objects.get(user=user)
+            is_trainer = True
+        except Trainer.DoesNotExist:
+            trainer = None
+            is_trainer = False
+        context = {'userinfo': user, 'trainer': trainer, 'is_trainer': is_trainer}
         return render(request, 'trainers/main.html', context)
     else:
         return HttpResponseRedirect(reverse('login_page'))
@@ -80,9 +86,8 @@ def client_add_action(request):
 
 def teams(request):
     if request.user.is_authenticated:
-        clients = Client.objects.all()
-        team_list = Team.objects.all()
-        context = {'teams': team_list, 'clients': clients}
+        team = Team.objects.all()
+        context = {'teams': team}
         return render(request, "trainers/teams.html", context)
     else:
         return HttpResponseRedirect(reverse('login_page'))
@@ -146,7 +151,8 @@ def team_add_action(request):
 def trainers(request):
     if request.user.is_authenticated:
         trainers = Trainer.objects.all()
-        context = {'trainers': trainers}
+        team_list = Team.objects.filter()
+        context = {'trainers': trainers, 'teams': team_list}
         return render(request, "trainers/trainers.html", context)
     else:
         return HttpResponseRedirect(reverse('login_page'))

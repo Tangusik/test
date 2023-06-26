@@ -1,14 +1,107 @@
-<h1> Info about client </h1>
+{% extends 'trainers/base.html' %}
 
-<p> name: {{client.first_name}} </p>
-<p> surname: {{client.last_name}}</p>
-<p> birth_date: {{client.birth_date}}</p>
+{% block head %}
+<link rel="stylesheet" href="../../../static/css/student.css">
+<link rel="stylesheet" href="../../../static/css/rectangles.css">
+{% endblock %}
+{% block content %}
 
-<p>Баланс: {{client.balance}}</p>
+<div id="student_page">
+    <div class="side">
+        <div class="photo"></div>
+        <div id="student_data">
+            <h3>{{client.first_name}} {{client.last_name}}</h3>
+            <h2>Баланс: {{client.balance}}</h2>
+            <h4>Студент.Группа1</h4>
 
-<h2> Adresses </h2>
+
+            {% for adres in adr %}
+            <p> {{adres.city}}, {{adres.street}}, {{adres.house}}, {{adres.building}}, {{adres.flat}} </p>
+            {% endfor %}
+            <button class="btn">Редактировать</button>
+        </div>
+    </div>
+
+    <div class="main">
+
+        <div class="container">
+            <div>
+                <div class="rectangle rectangle-left rectangle-back">
+                    <a href="#"><h2 style="font-size: 1.2em; padding-top: 1em">Пропущено занятий:</h2>
+                        <h1>14</h1></a>
+                </div>
+                <div class="rectangle rectangle-right rectangle-front">
+                    <a href="#"><h2 style="font-size: 1.2em; padding-top: 2em">Посещено занятий:</h2>
+                        <h1>15</h1></a>
+                </div>
+            </div>
+            <div class="container-text">
+                <h3>Занятия</h3>
+                <h4>Как выводить инфу об абонементе?</h4>
+            </div>
+        </div>
 
 
-{% for adres in adr %}
-<p> {{adres.city}}, {{adres.street}}, {{adres.house}}, {{adres.building}}, {{adres.flat}} </p>
-{% endfor %}
+        <div class="container">
+            <div class="container-text">
+                <h3>Достижения</h3>
+                <h4>Тут очень увлекательный текст про достижения</h4>
+            </div>
+            <div>
+                <div class="rectangle rectangle-right rectangle-back">
+                    <a href="#"><h2 style="font-size: 1.2em; padding-top: 2em">Награды</h2>
+                        <h1>28</h1></a></div>
+                <div class="rectangle rectangle-left rectangle-front">
+                    <a href="#"><h2 style="font-size: 1.2em; padding-top: 3em">Участие</h2>
+                        <h1>39</h1></a></div>
+            </div>
+        </div>
+
+        <div id="skills">
+            <h3>Навыки</h3>
+            <p>Выносливость</p>
+            <div class="container_skills">
+                <div class="skills html">90%</div>
+            </div>
+
+            <p>Координация</p>
+            <div class="container_skills">
+                <div class="skills css">80%</div>
+            </div>
+
+            <p>Гибкость</p>
+            <div class="container_skills">
+                <div class="skills js">65%</div>
+            </div>
+
+            <p>Реакция</p>
+            <div class="container_skills">
+                <div class="skills php">60%</div>
+            </div>
+        </div>
+
+
+        <div class="ecip">
+            <h3>Экипировка</h3>
+            <h4>Нажмите на интересующую вас статистику, чтобы узнать больше</h4>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+<!--БЫЛО ДО-->
+<!--<h1> Info about client </h1>-->
+
+<!--<p> name: {{client.first_name}} </p>-->
+<!--<p> surname: {{client.last_name}}</p>-->
+<!--<p> birth_date: {{client.birth_date}}</p>-->
+
+<!--<p>Баланс: {{client.balance}}</p>-->
+
+<!--<h2> Adresses </h2>-->
+
+
+<!--{% for adres in adr %}-->
+<!--<p> {{adres.city}}, {{adres.street}}, {{adres.house}}, {{adres.building}}, {{adres.flat}} </p>-->
+<!--{% endfor %}-->

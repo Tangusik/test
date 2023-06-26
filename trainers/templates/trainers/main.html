@@ -1,38 +1,37 @@
-
-
 {% extends 'trainers/base.html' %}
-    {% block head %}
+{% block head %}
 <link rel="stylesheet" href="../../../static/css/index.css">
 <link rel="stylesheet" href="../../../static/css/slider.css">
 <link rel="stylesheet" href="../../../static/css/rectangles.css">
-    {% endblock %}
-  {% block content %}
+{% endblock %}
 
-
+{% block content %}
 <div class="container" style="background-color:  #98C1D9">
     <div>
         <div class="photo"></div>
     </div>
     <div class="container-text">
-        <h3>Сорудник.Имя</h3>
-        <h4>Сотрудник.Роль</h4>
-        <h4>Сотрудник.ДопСведения</h4>
+        <h3>{{userinfo.last_name}} {{userinfo.first_name}} {{trainer.otchestv}}</h3>
+        {% if is_trainer %}
+        <h4>Тренер</h4>
+        {% endif %}
+        <h4>{{trainer.birthdate}}</h4>
         <button class="btn" style="margin-left: 30px; margin-top: 30px">Редактировать</button>
     </div>
 </div>
 
 <div id="todo">
-        <h3>Трекер задач</h3>
-        <div class="inputField">
-            <input type="text" id="myInput" placeholder="Add your new todo">
-            <button class="addBtn">Добавить</button>
-        </div>
-        <ul id="myUL" class="todoList">
-        </ul>
-        <div class="footer">
-            <span>You have <span class="pendingTasks"></span> pending tasks</span>
-            <button>Clear All</button>
-        </div>
+    <h3>Трекер задач</h3>
+    <div class="inputField">
+        <input type="text" id="myInput" placeholder="Add your new todo">
+        <button class="addBtn">Добавить</button>
+    </div>
+    <ul id="myUL" class="todoList">
+    </ul>
+    <div class="footer">
+        <span>You have <span class="pendingTasks"></span> pending tasks</span>
+        <button>Clear All</button>
+    </div>
 </div>
 
 
@@ -77,9 +76,11 @@
     </div>
     <div>
         <div class="rectangle rectangle-right rectangle-back">
-            <a href="#"><h2 style="padding-top: 1em">Награды</h2><h1>28</h1></a></div>
+            <a href="#"><h2 style="padding-top: 1em">Награды</h2>
+                <h1>28</h1></a></div>
         <div class="rectangle rectangle-left rectangle-front">
-            <a href="#"><h2 style="padding-top: 2em">Участие</h2><h1>39</h1></a></div>
+            <a href="#"><h2 style="padding-top: 2em">Участие</h2>
+                <h1>39</h1></a></div>
     </div>
 </div>
 
@@ -115,10 +116,9 @@
 <!--<h2><a href="{% url 'trainers' %}">Тренеры </a> </h2>-->
 
 <!--<h2><a href="{% url 'activity' %}">Занятия </a> </h2>-->
-  {% endblock %}
+{% endblock %}
 
- {% block js%}
+{% block js%}
 <script src="../../../static/js/slider.js"></script>
-<script src="../../../static/js/text.js"></script>
 <script src="../../../static/js/todo.js"></script>
-  {% endblock %}
+{% endblock %}
