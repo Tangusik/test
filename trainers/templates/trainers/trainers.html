@@ -1,6 +1,7 @@
 {% extends 'trainers/base.html' %}
 {% block head %}
 <link rel="stylesheet" href="../../../static/css/students.css">
+<link rel="stylesheet" href="../../../static/css/form.css">
 {% endblock %}
 
 {% block content %}
@@ -44,6 +45,29 @@
         {%endif%}
     </div>
 </div>
+
+
+
+<div class="form">
+    <form class="decor" action="{% url 'trainers_add_action' %}" method="post">
+        {% csrf_token %}
+        <div class="form-left-decoration"></div>
+        <div class="form-right-decoration"></div>
+        <div class="circle"></div>
+        <div class="form-inner">
+            <h3>Добавление тренера</h3>
+            <input type="text" name="name" placeholder="Имя">
+            <input type="text" name="surname" placeholder="Фамилия">
+            <input type="text" name="otchestv" placeholder="Отчество">
+            <input type="email" name="mail" placeholder="Почта">
+            <input type="date" name="birth_date" placeholder="Дата рождения">
+            <input type="text" name="password" placeholder="Пароль">
+            <input type="submit" value="Добавить">
+        </div>
+    </form>
+</div>
+
+
 
 {% endblock %}
 

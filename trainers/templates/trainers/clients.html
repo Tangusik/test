@@ -1,17 +1,23 @@
-{% extends 'trainers/base.html' %}
-{% block content %}
 
 
-{%if clients%}
-<ul>
-    {% for client in clients %}
-    <li><a href="client/{{client.id}}"> {{client.first_name}} {{client.last_name}} </a></li>
-    {% endfor %}
-</ul>
-{% else %}
-<p>No clients sore</p>
-{%endif%}
 
-<p><a href="client/add"> Add client </a></p>
 
-{% endblock %}
+<!--ТЕПЕРЬ ЭТОТ ФАЙЛ НЕ НУЖЕН, ДАВАЙ УДАЛИМ!-->
+<!--ЭТА ИНФОРМАЦИЯ НАХОДИТСЯ НА СТРАНИЦЕ TEAMS-->
+
+
+<!--БЫЛО ДО-->
+
+
+<!--{%if clients%}-->
+<!--<ul>-->
+<!--    {% for client in clients %}-->
+<!--    <li><a href="client/{{client.id}}"> {{client.first_name}} {{client.last_name}} </a></li>-->
+<!--    {% endfor %}-->
+<!--</ul>-->
+<!--{% else %}-->
+<!--<p>No clients sore</p>-->
+<!--{%endif%}-->
+
+<!--<p><a href="client/add"> Add client </a></p>-->
+

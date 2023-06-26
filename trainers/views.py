@@ -123,20 +123,18 @@ def team_add_action(request):
     act_end_time = request.POST['act_end_time']
     price = request.POST['price']
     try:
-        tr= get_object_or_404(Trainer, pk=trainer)
-        team = Team.objects.create(name=team_name, trainer = tr)
+        tr = get_object_or_404(Trainer, pk=trainer)
+        team = Team.objects.create(name=team_name, trainer=tr)
         for client in members:
             team.clients.add(client)
 
         date1 = datetime.date.today()
         date2 = datetime.datetime.strptime(date_end, '%Y-%m-%d')
 
-
-
         while date1 <= date2.date():
             if str(date1.weekday()) in days:
-                act = Activity(act_date = date1, act_time_begin =act_begin_time,
-                               act_time_end=act_end_time, trainer = tr, price=price)
+                act = Activity(act_date=date1, act_time_begin=act_begin_time,
+                               act_time_end=act_end_time, trainer=tr, price=price)
                 act.save()
                 for client in members:
                     act.clients.add(client)
@@ -193,6 +191,7 @@ def trainer_info(request, trainer_id):
     else:
         return HttpResponseRedirect(reverse('login_page'))
 
+
 def activity(request):
     if request.user.is_authenticated:
         activity_list = Activity.objects.all()
@@ -200,6 +199,7 @@ def activity(request):
         return render(request, "trainers/activities.html", context)
     else:
         return HttpResponseRedirect(reverse('login_page'))
+
 
 def activity_info(request, activity_id):
     if request.user.is_authenticated:
@@ -209,6 +209,7 @@ def activity_info(request, activity_id):
         return render(request, "trainers/act_info.html", context)
     else:
         return HttpResponseRedirect(reverse('login_page'))
+
 
 def activity_change(request, activity_id):
     status = request.POST['status']

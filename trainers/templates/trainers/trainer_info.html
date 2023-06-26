@@ -1,35 +1,48 @@
-<h1> Информация о тренере  </h1>
 
-<ul>
 
-    <li>
-        <p> Имя тренера: {{trainer.user.first_name}}  </p>
-    </li>
 
-    <li>
-        <p> Фамилия тренера: {{trainer.user.last_name}}  </p>
-    </li>
 
-    <li>
-        <p> Отчество тренера: {{trainer.otchestv}}  </p>
-    </li>
+<!--ТЕПЕРЬ ЭТОТ ФАЙЛ НЕ НУЖЕН, ДАВАЙ УДАЛИМ!-->
+<!--ЭТА ИНФОРМАЦИЯ НАХОДИТСЯ НА СТРАНИЦЕ TRAINERS-->
 
-    <li>
-        <p> Дата рождения: {{trainer.birth_date}}  </p>
-    </li>
 
-</ul>
 
-    {% if groups %}
-<!--TEAMS?-->
-    <p>Группы </p>
+<!--БЫЛО ДО-->
 
-    <ul>
-    {% for team in teams %}
-        <li> <a href="{% url 'team' %}/{{team.id}}"> {{team.name}} </a></li>
-    {% endfor %}
-    </ul>
 
-    {% else %}
-        <p>У тренера ещё нет групп.</p>
-    {% endif %}
+
+<!--<h1> Информация о тренере  </h1>-->
+
+<!--<ul>-->
+
+<!--    <li>-->
+<!--        <p> Имя тренера: {{trainer.user.first_name}}  </p>-->
+<!--    </li>-->
+
+<!--    <li>-->
+<!--        <p> Фамилия тренера: {{trainer.user.last_name}}  </p>-->
+<!--    </li>-->
+
+<!--    <li>-->
+<!--        <p> Отчество тренера: {{trainer.otchestv}}  </p>-->
+<!--    </li>-->
+
+<!--    <li>-->
+<!--        <p> Дата рождения: {{trainer.birth_date}}  </p>-->
+<!--    </li>-->
+
+<!--</ul>-->
+
+<!--    {% if groups %}-->
+<!--&lt;!&ndash;TEAMS?&ndash;&gt;-->
+<!--    <p>Группы </p>-->
+
+<!--    <ul>-->
+<!--    {% for team in teams %}-->
+<!--        <li> <a href="{% url 'team' %}/{{team.id}}"> {{team.name}} </a></li>-->
+<!--    {% endfor %}-->
+<!--    </ul>-->
+
+<!--    {% else %}-->
+<!--        <p>У тренера ещё нет групп.</p>-->
+<!--    {% endif %}-->

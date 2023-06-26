@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>crm</title>
+  <title>CRM</title>
   <link rel="stylesheet" href="../../../static/css/enter.css">
 </head>
 
@@ -11,9 +11,10 @@
 <h1>Sign In</h1>
 
 <div id="wrapper">
-  <form id="signin" action="{% url 'login' %}" autocomplete="off">
-    <input type="text" id="user" name="user" placeholder="username" required>
-    <input type="password" id="pass" name="pass" placeholder="password" required>
+  <form id="signin" action="{% url 'login' %}" autocomplete="off"  method="post">
+        {% csrf_token %}
+    <input type="text" id="username" name="username" placeholder="username" required>
+    <input type="password" id="password" name="password" placeholder="password" required>
     <button type="submit">&#129453;</button>
     <a href="#">Забыли пароль? </a>
   </form>
@@ -23,6 +24,8 @@
 </html>
 
 
+
+<!--БЫЛО ДО -->
 <!--<form action="{% url 'login' %}" method="post">-->
 <!--    {% csrf_token %}-->
 

@@ -1,5 +1,12 @@
-#form{
-    background-color: rgb(152, 193, 217, 0.7);;
+.teams_forms{
+      display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.form{
+    background-color: rgb(152, 193, 217, 0.7);
     padding-top: 50px;
     padding-bottom: 50px;
 }

@@ -1,28 +1,16 @@
- {% extends 'trainers/base.html' %}
 
-   {% block head %}
-     <link rel="stylesheet" href="../../../static/css/form.css">
-    {% endblock %}
 
-  {% block content %}
-  <div id="form">
-    <form id="sch" class="decor" action="{% url 'client_add_action' %}">
-        <div class="form-left-decoration"></div>
-        <div class="form-right-decoration"></div>
-        <div class="circle"></div>
-        <div class="form-inner">
-            <h3>Добавление клиента</h3>
-            <input type="text" id="name" placeholder="Имя">
-            <input type="text" id="last_name" placeholder="Фамилия">
-            <input type="text" id="dady_name" placeholder="Отчество">
-            <input type="text" id="email" placeholder="Почта">
-            <input type="date" id="birthday" placeholder="Дата рождения">
-            <textarea id="note" placeholder="Примечание..." rows="3"></textarea>
-            <input type="submit" id="sub" value="Добавить" onclick="addClient()">
-        </div>
-    </form>
-</div>
-    {% endblock %}
+
+
+<!--ТЕПЕРЬ ЭТОТ ФАЙЛ НЕ НУЖЕН, ДАВАЙ УДАЛИМ!-->
+<!--ЭТА ИНФОРМАЦИЯ НАХОДИТСЯ НА СТРАНИЦЕ TEAMS-->
+
+
+
+
+
+<!-- БЫЛО ДО-->
+
 <!--<form action="{% url 'client_add_action' %}" method="post">-->
 <!--    {% csrf_token %}-->
 <!--    <p>Имя:-->
