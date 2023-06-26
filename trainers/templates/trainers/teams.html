@@ -1,24 +1,25 @@
 {% extends 'trainers/base.html' %}
-{% block content %}
 
- {% block head %}
-    <link rel="stylesheet" href="../../../static/css/students.css">
-    {% endblock %}
+{% block head %}
+<link rel="stylesheet" href="../../../static/css/students.css">
+{% endblock %}
+
+{% block content %}
 
 <div id="cards">
     <h2 id="my_students">Мои ученики</h2>
     {%if teams%}
     {% for team in teams %}
     <details>
-        <summary>{{team.id}} {{team.name}} </summary>
+        <summary>{{team.id}} {{team.name}}</summary>
         <div class="cards_elements">
             {%if clients%}
-               {% for client in clients %}
+            {% for client in clients %}
             <div class="card">
                 <div class="front">
                     <p>Студент.ДеньРождения</p>
                     <h1>
-                        {{client.first_name}}  {{client.last_name}}
+                        {{client.first_name}} {{client.last_name}}
                     </h1>
                     <p>Студент.Описание
                     </p>
@@ -26,15 +27,15 @@
                 <div class="back">
                     <p>Студент.ДеньРождения</p>
                     <h1>
-                        {{client.first_name}}  {{client.last_name}}
+                        {{client.first_name}} {{client.last_name}}
                     </h1>
                     <p><a href="client/{{client.id}}">Студент.Ссылка</a></p>
                 </div>
             </div>
-                {% endfor %}
+            {% endfor %}
             {% else %}
-<p>No clients</p>
-{%endif%}
+            <p>No clients</p>
+            {%endif%}
         </div>
     </details>
 
@@ -42,9 +43,17 @@
 
     {% else %}
     <p>Нет групп</p>
-{%endif%}
+    {%endif%}
 
+
+    <div class="add_group" ><a href="{% url 'team_add' %}"> Создать группу </a></div>
 </div>
+
+
+{% endblock %}
+
+
+<!--БЫЛО ДО-->
 
 
 <!--{%if teams%}-->
@@ -56,7 +65,3 @@
 <!--{% else %}-->
 <!--    <p>Нет групп</p>-->
 <!--{%endif%}-->
-
-<p> <a href="{% url 'team_add' %}"> Создать группу </a> </p>
-
-{% endblock %}

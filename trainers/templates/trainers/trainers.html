@@ -1,15 +1,63 @@
-<h1>Тренеры</h1>
+{% extends 'trainers/base.html' %}
+{% block head %}
+<link rel="stylesheet" href="../../../static/css/students.css">
+{% endblock %}
 
-{% if trainers %}
-    <ul>
+{% block content %}
+
+
+<div id="cards">
+    <h2 id="my_students">Мои коллеги</h2>
+    {%if trainers %}
+    <div class="cards_elements">
         {% for trainer in trainers %}
-
-            <li> <a href="trainers/{{trainer.user.id}}">{{trainer.user.first_name}} {{trainer.user.last_name}} </a> </li>
-
+        <div class="card">
+            <div class="front">
+                <p>Студент.ДеньРождения</p>
+                <h1>
+                    {{trainer.user.first_name}} {{trainer.user.last_name}}
+                </h1>
+                <p>Студент.Описание
+                </p>
+            </div>
+            <div class="back">
+                <p>Студент.ДеньРождения</p>
+                <h1>
+                    {{trainer.user.first_name}} {{trainer.user.last_name}}
+                </h1>
+                <p><a href="trainers/{{trainer.user.id}}">Студент.Ссылка</a></p>
+            </div>
+        </div>
         {% endfor %}
-    </ul>
-{% else %}
-    <p>No trainers sore </p>
-{% endif %}
+        {% else %}
+        <p>No clients</p>
+        {%endif%}
+    </div>
+</div>
 
-<p> <a href="{% url 'trainers_add' %}"> Добавить тренера </a> </p>
+{% endblock %}
+
+
+
+
+
+
+
+
+<!--БЫЛО ДО-->
+
+<!--<h1>Тренеры</h1>-->
+
+<!--{% if trainers %}-->
+<!--    <ul>-->
+<!--        {% for trainer in trainers %}-->
+
+<!--            <li style="color: #293241"> <a href="trainers/{{trainer.user.id}}">{{trainer.first_name}} {{trainer.user.last_name}} </a> </li>-->
+
+<!--        {% endfor %}-->
+<!--    </ul>-->
+<!--{% else %}-->
+<!--    <p>No trainers sore </p>-->
+<!--{% endif %}-->
+
+<!--<p> <a href="{% url 'trainers_add' %}"> Добавить тренера </a> </p>-->
