@@ -1,12 +1,16 @@
 .teams_forms{
-      display: flex;
+    background-color: rgb(152, 193, 217);
+    display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
 }
 
+.trainer_form{
+    background-color: rgb(152, 193, 217);
+}
+
 .form{
-    background-color: rgb(152, 193, 217, 0.7);
     padding-top: 50px;
     padding-bottom: 50px;
 }
@@ -121,4 +125,19 @@ input::-webkit-datetime-edit-month-field:focus,
 input::-webkit-datetime-edit-year-field:focus {
     background-color: #f69a73;
     color: black;
+}
+
+.select{
+     box-sizing: border-box;
+    display: block;
+    width: 100%;
+    padding: 0 20px;
+    margin-bottom: 10px;
+    background: #dddddd;
+    line-height: 40px;
+    border-width: 0;
+    border-radius: 20px;
+    font-family: 'Roboto', sans-serif;
+    align-items: center;
+    color: #3D5A80;
 }

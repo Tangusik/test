@@ -46,12 +46,13 @@ def main(request):
     else:
         return HttpResponseRedirect(reverse('login_page'))
 
-
+# не нужен
 def clients(request):
     if request.user.is_authenticated:
         clients = Client.objects.all()
         context = {'clients': clients}
         return render(request, "trainers/client.html", context)
+    # страница client.html существует?
     else:
         return HttpResponseRedirect(reverse('login_page'))
 
@@ -65,7 +66,7 @@ def client_info(request, client_id):
     else:
         return HttpResponseRedirect(reverse('login_page'))
 
-
+# не нужен
 def client_add(request):
     if request.user.is_authenticated:
         return render(request, "trainers/client_add.html")
@@ -92,7 +93,7 @@ def teams(request):
     else:
         return HttpResponseRedirect(reverse('login_page'))
 
-
+# не нужен
 def team_info(request, team_id):
     if request.user.is_authenticated:
         team = get_object_or_404(Team, pk=team_id)
@@ -149,13 +150,14 @@ def team_add_action(request):
 def trainers(request):
     if request.user.is_authenticated:
         trainers = Trainer.objects.all()
-        team_list = Team.objects.filter()
-        context = {'trainers': trainers, 'teams': team_list}
+        # team_list = Team.objects.filter()
+        # context = {'trainers': trainers, 'teams': team_list}
+        context = {'trainers': trainers}
         return render(request, "trainers/trainers.html", context)
     else:
         return HttpResponseRedirect(reverse('login_page'))
 
-
+# не нужен
 def trainers_add(request):
     if request.user.is_authenticated:
         return render(request, "trainers/trainers_add.html")
@@ -179,9 +181,9 @@ def trainers_add_action(request):
         trainer.save()
         return HttpResponseRedirect(reverse('trainers'))
     except:
-        return HttpResponseRedirect(reverse('trainers_add'))
+        return HttpResponseRedirect(reverse('trainers'))
 
-
+# не нужен
 def trainer_info(request, trainer_id):
     if request.user.is_authenticated:
         trainer = get_object_or_404(Trainer, pk=trainer_id)

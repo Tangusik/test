@@ -23,11 +23,15 @@ a {
 }
 
 button {
+    height: 4em;
+    width: 10em;
     border: none;
+    border-radius: 1em;
     outline: none;
-    background-color: lightblue;
-    color: #293241;
+    background-color: #3D5A80;
+    color: #dddddd;
     text-align: center;
+    font-size: 0.8em;
 }
 
 

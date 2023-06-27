@@ -15,17 +15,17 @@
         <div class="card">
             <div class="front">
                 <p> {{trainer.birthdate}}</p>
-                <h1>
-                    {{trainer.user.last_name}} {{trainer.user.first_name}} {{trainer.otchestv}}
-                </h1>
+                <h2>
+                    {{trainer.user.last_name}} <br> {{trainer.user.first_name}} <br> {{trainer.otchestv}}
+                </h2>
                 <p> Какое-нить описание
                 </p>
             </div>
             <div class="back">
                 <p> {{trainer.birthdate}}</p>
-                <h1>
-                    {{trainer.user.last_name}} {{trainer.user.first_name}} {{trainer.otchestv}}
-                </h1>
+                <h2>
+                    {{trainer.user.last_name}} <br> {{trainer.user.first_name}} <br> {{trainer.otchestv}}
+                </h2>
                 <p> {% if trainer.team_set.all  %}
                 <ul>
                     {% for team in trainer.team_set.all %}
@@ -47,7 +47,7 @@
 </div>
 
 
-
+<div class="trainer_form">
 <div class="form">
     <form class="decor" action="{% url 'trainers_add_action' %}" method="post">
         {% csrf_token %}
@@ -57,7 +57,7 @@
         <div class="form-inner">
             <h3>Добавление тренера</h3>
             <input type="text" name="name" placeholder="Имя">
-            <input type="text" name="surname" placeholder="Фамилия">
+            <input  type="text" name="last_name" placeholder="Фамилия">
             <input type="text" name="otchestv" placeholder="Отчество">
             <input type="email" name="mail" placeholder="Почта">
             <input type="date" name="birth_date" placeholder="Дата рождения">
@@ -65,6 +65,7 @@
             <input type="submit" value="Добавить">
         </div>
     </form>
+</div>
 </div>
 
 
