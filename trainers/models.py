@@ -10,11 +10,16 @@ class Client(models.Model):
     reg_date = models.DateField(auto_now=True, blank=True)
     birth_date = models.DateField(auto_now=False, blank=True, default=datetime.date(2023, 1, 1))
 
+    def __str__(self):
+        return self.first_name
+
 
 class Trainer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     otchestv = models.CharField(blank=True, max_length=20)
     birthdate = models.DateField(auto_now=False)
+    def __str__(self):
+        return self.user.first_name
 
 
 class Address(models.Model):
@@ -38,7 +43,8 @@ class Team(models.Model):
     name = models.CharField(max_length=20, default="qwerty")
     clients = models.ManyToManyField(Client)
     trainer = models.ForeignKey(Trainer, models.CASCADE, blank=True, null=True)
-
+    def __str__(self):
+        return self.name
 
 class Activity(models.Model):
     price = models.IntegerField(blank=False, default=0)
@@ -48,3 +54,7 @@ class Activity(models.Model):
     clients = models.ManyToManyField(Client)
     trainer = models.ForeignKey(Trainer, on_delete=models.DO_NOTHING)
     status = models.CharField(max_length=20, default="Состоится")
+
+    def __str__(self):
+        act_name = self.act_date + " - " + self.act_time_begin
+        return self.act_name

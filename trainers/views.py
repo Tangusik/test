@@ -1,11 +1,10 @@
 import datetime, calendar
 
-from django.db import IntegrityError
 from django.shortcuts import render
 from .models import Client, Address, Team, Trainer, Activity
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.shortcuts import get_object_or_404
 
@@ -48,16 +47,13 @@ def main(request):
         return HttpResponseRedirect(reverse('login_page'))
 
 
-# не нужен
 def clients(request):
     if request.user.is_authenticated:
         clients = Client.objects.all()
         context = {'clients': clients}
-        return render(request, "trainers/client.html", context)
-    # страница client.html существует?
+        return render(request, "trainers/clients.html", context)
     else:
         return HttpResponseRedirect(reverse('login_page'))
-
 
 def client_info(request, client_id):
     if request.user.is_authenticated:
@@ -69,21 +65,13 @@ def client_info(request, client_id):
         return HttpResponseRedirect(reverse('login_page'))
 
 
-# не нужен
-def client_add(request):
-    if request.user.is_authenticated:
-        return render(request, "trainers/client_add.html")
-    else:
-        return HttpResponseRedirect(reverse('login_page'))
-
-
 def client_add_action(request):
     client_name = request.POST['client_name']
     client_surname = request.POST['client_surname']
     client_birthdate = request.POST['client_birthdate']
     try:
         Client.objects.create(first_name=client_name, last_name=client_surname, birth_date=client_birthdate)
-        return HttpResponseRedirect(reverse('client'))
+        return HttpResponseRedirect(reverse('clients'))
     except:
         return HttpResponseRedirect(reverse('client_add'))
 
@@ -93,27 +81,6 @@ def teams(request):
         team = Team.objects.all()
         context = {'teams': team}
         return render(request, "trainers/teams.html", context)
-    else:
-        return HttpResponseRedirect(reverse('login_page'))
-
-
-# не нужен
-def team_info(request, team_id):
-    if request.user.is_authenticated:
-        team = get_object_or_404(Team, pk=team_id)
-        clients = team.clients.all()
-        context = {'team': team, 'clients': clients}
-        return render(request, "trainers/team_info.html", context)
-    else:
-        return HttpResponseRedirect(reverse('login_page'))
-
-
-def team_add(request):
-    if request.user.is_authenticated:
-        client_list = Client.objects.all()
-        trainer_list = Trainer.objects.all()
-        context = {'clients': client_list, 'trainers': trainer_list}
-        return render(request, "trainers/team_add.html", context)
     else:
         return HttpResponseRedirect(reverse('login_page'))
 
@@ -154,18 +121,8 @@ def team_add_action(request):
 def trainers(request):
     if request.user.is_authenticated:
         trainers = Trainer.objects.all()
-        # team_list = Team.objects.filter()
-        # context = {'trainers': trainers, 'teams': team_list}
         context = {'trainers': trainers}
         return render(request, "trainers/trainers.html", context)
-    else:
-        return HttpResponseRedirect(reverse('login_page'))
-
-
-# не нужен
-def trainers_add(request):
-    if request.user.is_authenticated:
-        return render(request, "trainers/trainers_add.html")
     else:
         return HttpResponseRedirect(reverse('login_page'))
 
@@ -182,23 +139,12 @@ def trainers_add_action(request):
         user.last_name = trainer_last_name
         user.first_name = trainer_name
         user.save()
+        print('user created')
         trainer = Trainer(user=user, otchestv=trainer_otchestv, birthdate=trainer_birthdate)
         trainer.save()
         return HttpResponseRedirect(reverse('trainers'))
     except:
         return HttpResponseRedirect(reverse('trainers'))
-
-
-# не нужен
-def trainer_info(request, trainer_id):
-    if request.user.is_authenticated:
-        trainer = get_object_or_404(Trainer, pk=trainer_id)
-        team_list = Team.objects.filter()
-        context = {'trainer': trainer, 'teams': team_list}
-        return render(request, "trainers/trainer_info.html", context)
-    else:
-        return HttpResponseRedirect(reverse('login_page'))
-
 
 def activity(request):
     if request.user.is_authenticated:
