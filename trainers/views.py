@@ -1,10 +1,11 @@
 import datetime, calendar
 
+from django.db import IntegrityError
 from django.shortcuts import render
 from .models import Client, Address, Team, Trainer, Activity
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.shortcuts import get_object_or_404
 
@@ -46,6 +47,7 @@ def main(request):
     else:
         return HttpResponseRedirect(reverse('login_page'))
 
+
 # не нужен
 def clients(request):
     if request.user.is_authenticated:
@@ -65,6 +67,7 @@ def client_info(request, client_id):
         return render(request, "trainers/clients_info.html", context)
     else:
         return HttpResponseRedirect(reverse('login_page'))
+
 
 # не нужен
 def client_add(request):
@@ -92,6 +95,7 @@ def teams(request):
         return render(request, "trainers/teams.html", context)
     else:
         return HttpResponseRedirect(reverse('login_page'))
+
 
 # не нужен
 def team_info(request, team_id):
@@ -157,6 +161,7 @@ def trainers(request):
     else:
         return HttpResponseRedirect(reverse('login_page'))
 
+
 # не нужен
 def trainers_add(request):
     if request.user.is_authenticated:
@@ -182,6 +187,7 @@ def trainers_add_action(request):
         return HttpResponseRedirect(reverse('trainers'))
     except:
         return HttpResponseRedirect(reverse('trainers'))
+
 
 # не нужен
 def trainer_info(request, trainer_id):

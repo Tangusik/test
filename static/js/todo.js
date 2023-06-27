@@ -75,9 +75,9 @@ todoList.addEventListener('click', function(ev) {
 
 
 
-// window.onload = function() {
-//     let blockIsActive = localStorage.getItem("blockIsActive");
-//     if (blockIsActive === "true") {
-//             console.log(es)
-//
-// }}
+window.onload = function() {
+    let blockIsActive = localStorage.getItem("blockIsActive");
+    if (blockIsActive === "true") {
+            console.log(es)
+
+}}
