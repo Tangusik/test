@@ -44,11 +44,11 @@
     {%endif%}
     <!--    <div class="add_group" ><a href="{% url 'team_add' %}"> Создать группу </a></div>-->
     <div class="teams_btn">
-    <button onclick="showGroupForm"> Создать группу</button>
-    <button onclick="showClientForm"> Добавить клиента </button>
+    <button onclick="showGroupForm()"> Создать группу</button>
+    <button onclick="showClientForm()"> Добавить клиента </button>
     </div>
             <div class="teams_forms">
-                <div class="form">
+                <div class="form" id="form_add_team">
                     <form class="decor" action="{% url 'team_add_action' %}" method="post">
                         {% csrf_token %}
                         <div class="form-left-decoration"></div>
@@ -94,7 +94,7 @@
                         </div>
                     </form>
                 </div>
-                <div class="form">
+                <div class="form" id="form_add_client">
                     <form class="decor" action="{% url 'client_add_action' %}" method="post">
                         {% csrf_token %}
                         <div class="form-left-decoration"></div>
@@ -112,8 +112,11 @@
                 </div>
             </div>
 </div>
-
     {% endblock %}
+
+{% block js%}
+<script src="../../../static/js/buttons.js"></script>
+  {% endblock %}
 
 
 

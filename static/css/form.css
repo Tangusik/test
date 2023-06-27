@@ -10,6 +10,14 @@
     background-color: rgb(152, 193, 217);
 }
 
+#form_add_team{
+    display: none;
+}
+
+#form_add_client{
+    display: none;
+}
+
 .form{
     padding-top: 50px;
     padding-bottom: 50px;
