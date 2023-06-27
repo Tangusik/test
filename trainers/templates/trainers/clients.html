@@ -1,23 +1,71 @@
+{% extends 'trainers/base.html' %}
+
+{% block head %}
+<link rel="stylesheet" href="../../../static/css/students.css">
+<link rel="stylesheet" href="../../../static/css/form.css">
+{% endblock %}
+
+{% block content %}
+
+<div id="cards">
+    <h2 id="my_students">Клиенты</h2>
+    <h4>Тут еще будет сортировка/фильтрация по группам</h4>
+    {%if clients%}
+    {% for client in clients %}
+    <details>
+        <summary>
+            {{ client.first_name }} {{ client.last_name }}
+        </summary>
+        <div class="cards_elements">
+            <div class="card">
+                <div class="front">
+                    <p>{{client.birth_date}}</p>
+                    <h1>
+                        {{client.first_name}} {{client.last_name}}
+                    </h1>
+                    <p>Студент.Описание
+                    </p>
+                </div>
+                <div class="back">
+                    <p>{{client.birth_date}}</p>
+                    <h1>
+                        {{client.first_name}} {{client.last_name}}
+                    </h1>
+                    <p><a href="client/{{client.id}}">Студент.Ссылка</a></p>
+                </div>
+            </div>
+        </div>
+    </details>
+    {% endfor %}
+    {% else %}
+    <p>Нет клиентов</p>
+    {%endif%}
 
 
+    <div class="teams_btn">
+    <button onclick="showClientForm()"> Добавить клиента </button>
+    </div>
 
+                <div class="form" id="form_add_client">
+                    <form class="decor" action="{% url 'client_add_action' %}" method="post">
+                        {% csrf_token %}
+                        <div class="form-left-decoration"></div>
+                        <div class="form-right-decoration"></div>
+                        <div class="circle"></div>
+                        <div class="form-inner">
+                            <h3>Добавление клиента</h3>
+                            <input type="text" name="client_name" id="client_name" placeholder="Имя">
+                            <input type="text" name="client_surname" id="client_surname" placeholder="Фамилия">
+                            <input type="date" name="client_birthdate" id="client_birthdate"
+                                   placeholder="Дата рождения">
+                            <input type="submit" value="Добавить">
+                        </div>
+                    </form>
+                </div>
+            </div>
+</div>
+    {% endblock %}
 
-<!--ТЕПЕРЬ ЭТОТ ФАЙЛ НЕ НУЖЕН, ДАВАЙ УДАЛИМ!-->
-<!--ЭТА ИНФОРМАЦИЯ НАХОДИТСЯ НА СТРАНИЦЕ TEAMS-->
-
-
-<!--БЫЛО ДО-->
-
-
-<!--{%if clients%}-->
-<!--<ul>-->
-<!--    {% for client in clients %}-->
-<!--    <li><a href="client/{{client.id}}"> {{client.first_name}} {{client.last_name}} </a></li>-->
-<!--    {% endfor %}-->
-<!--</ul>-->
-<!--{% else %}-->
-<!--<p>No clients sore</p>-->
-<!--{%endif%}-->
-
-<!--<p><a href="client/add"> Add client </a></p>-->
-
+{% block js%}
+<script src="../../../static/js/buttons.js"></script>
+  {% endblock %}
