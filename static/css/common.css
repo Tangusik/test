@@ -76,6 +76,19 @@ ul{
     margin-right: 3vw;
 }
 
+#exit{
+    height: 2em;
+    width: 6em;
+    /*border: none;*/
+    border-radius: 1em;
+    outline: none;
+    background-color: #98C1D9;
+    color: #293241;
+    text-align: center;
+    font-size: 1em;
+    margin-right: 3vw;
+}
+
 @media (max-width: 840px) {
     .nav {
         display: flex;
