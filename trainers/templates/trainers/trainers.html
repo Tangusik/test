@@ -6,8 +6,7 @@
 
 {% block content %}
 
-<div style="background-color: rgb(152, 193, 217);">
- <h2 id="my_students">Мои коллеги</h2>
+<h2 id="my_students">Мои коллеги</h2>
 <div id="cards">
     {%if trainers %}
     <div class="cards_elements">
@@ -26,10 +25,10 @@
                 <h2>
                     {{trainer.user.last_name}} <br> {{trainer.user.first_name}} <br> {{trainer.otchestv}}
                 </h2>
-                <p> {% if trainer.team_set.all  %}
+                <p> {% if trainer.team_set.all %}
                 <ul>
                     {% for team in trainer.team_set.all %}
-                    <li> <a href="{% url 'teams' %}/{{team.id}}">{{ team.name }} </a></li>
+                    <li><a href="{% url 'teams' %}/{{team.id}}">{{ team.name }} </a></li>
                     {% endfor %}
                 </ul>
 
@@ -45,48 +44,31 @@
         {%endif%}
     </div>
 </div>
-
-
-<div class="trainer_form">
-<div class="form">
-    <form class="decor" action="{% url 'trainers_add_action' %}" method="post">
-        {% csrf_token %}
-        <div class="form-left-decoration"></div>
-        <div class="form-right-decoration"></div>
-        <div class="circle"></div>
-        <div class="form-inner">
-            <h3>Добавление тренера</h3>
-            <input type="text" name="name" placeholder="Имя">
-            <input  type="text" name="last_name" placeholder="Фамилия">
-            <input type="text" name="otchestv" placeholder="Отчество">
-            <input type="email" name="mail" placeholder="Почта">
-            <input type="date" name="birth_date" placeholder="Дата рождения">
-            <input type="text" name="password" placeholder="Пароль">
-            <input type="submit" value="Добавить">
-        </div>
-    </form>
-</div>
-</div>
+<div class="common_form">
+    <button class="change_btn" onclick="showTrainerForm()"> Добавить тренера</button>
+    <div class="form" id="form_add_trainer">
+        <form class="decor" action="{% url 'trainers_add_action' %}" method="post">
+            {% csrf_token %}
+            <div class="form-left-decoration"></div>
+            <div class="form-right-decoration"></div>
+            <div class="circle"></div>
+            <div class="form-inner">
+                <h3>Добавление тренера</h3>
+                <input type="text" name="name" placeholder="Имя">
+                <input type="text" name="last_name" placeholder="Фамилия">
+                <input type="text" name="otchestv" placeholder="Отчество">
+                <input type="email" name="mail" placeholder="Почта">
+                <input type="date" name="birth_date" placeholder="Дата рождения">
+                <input type="text" name="password" placeholder="Пароль">
+                <input type="submit" value="Добавить">
+            </div>
+        </form>
+    </div>
 </div>
 
 
 {% endblock %}
 
-
-<!--БЫЛО ДО-->
-
-<!--<h1>Тренеры</h1>-->
-
-<!--{% if trainers %}-->
-<!--    <ul>-->
-<!--        {% for trainer in trainers %}-->
-
-<!--            <li style="color: #293241"> <a href="trainers/{{trainer.user.id}}">{{trainer.first_name}} {{trainer.user.last_name}} </a> </li>-->
-
-<!--        {% endfor %}-->
-<!--    </ul>-->
-<!--{% else %}-->
-<!--    <p>No trainers sore </p>-->
-<!--{% endif %}-->
-
-<!--<p> <a href="{% url 'trainers_add' %}"> Добавить тренера </a> </p>-->
+{% block js%}
+<script src="../../../static/js/buttons.js"></script>
+{% endblock %}

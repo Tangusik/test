@@ -13,6 +13,17 @@
     display: none;
 }
 
+#form_add_trainer{
+    display: none;
+}
+
+.common_form{
+    background-color: rgb(152, 193, 217, 0.7);
+}
+
+
+
+
 .form{
     padding-top: 50px;
     padding-bottom: 50px;

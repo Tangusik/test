@@ -16,3 +16,13 @@ function showClientForm() {
         form.style.display = "none";
     }
 }
+
+
+function showTrainerForm() {
+    var form = document.getElementById("form_add_trainer");
+    if (form.style.display === "none") {
+        form.style.display = "block";
+    } else {
+        form.style.display = "none";
+    }
+}

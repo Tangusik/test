@@ -6,9 +6,8 @@
 {% endblock %}
 
 {% block content %}
-
+<h2 id="my_students">ВСЕ группы и ученики</h2>
 <div id="cards">
-    <h2 id="my_students">ВСЕ группы и ученики</h2>
     {%if teams%}
     {% for team in teams %}
     <details>
@@ -41,9 +40,11 @@
     {% else %}
     <p>Нет групп</p>
     {%endif%}
-       <div class="teams_btn">
+</div>
+<div class="common_form">
+    <div class="teams_btn">
         <button class="change_btn" onclick="showGroupForm()"> Создать группу</button>
-        <button class="change_btn"onclick="showClientForm()"> Добавить клиента</button>
+        <button class="change_btn" onclick="showClientForm()"> Добавить клиента</button>
     </div>
     <div class="teams_forms">
         <div class="form" id="form_add_team">
@@ -110,8 +111,6 @@
         </div>
     </div>
 </div>
-
-
 {% endblock %}
 
 {% block js%}
