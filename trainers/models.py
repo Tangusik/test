@@ -58,3 +58,18 @@ class Activity(models.Model):
     def __str__(self):
         act_name = self.act_date + " - " + self.act_time_begin
         return self.act_name
+
+class News(models.Model):
+    title = models.CharField(max_length=200)
+    pub_date = models.DateTimeField('date published')
+    expiry_date = models.DateTimeField('expiry date')
+    text = models.TextField()
+
+    def __str__(self):
+        return self.title
+
+    def is_expired(self):
+        return timezone.now() > self.expiry_date
+
+    class Meta:
+        ordering = ['-pub_date']
