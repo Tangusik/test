@@ -12,13 +12,16 @@
     </div>
     <div class="container-text">
         <h3>{{userinfo.last_name}} {{userinfo.first_name}} {{trainer.otchestv}}</h3>
+        <h5>{{userinfo.email}}</h5>
         {% if is_trainer %}
         <h4>Тренер</h4>
         {% endif %}
         <h4>{{trainer.birthdate}}</h4>
-        <button class="change_btn" style="margin-top: 30px">Редактировать</button>
+        <button class="change_btn" style="margin-top: 30px" onclick="edit_data()">Редактировать</button>
     </div>
 </div>
+
+
 
 <div id="todo">
     <h3>Трекер задач</h3>
@@ -111,4 +114,5 @@
 {% block js%}
 <script src="../../../static/js/slider.js"></script>
 <script src="../../../static/js/todo.js"></script>
+<script src="../../../static/js/edit_data.js"></script>
 {% endblock %}

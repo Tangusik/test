@@ -183,3 +183,7 @@ def activity_change(request, activity_id):
         return HttpResponseRedirect(reverse('activity'))
     except:
         return HttpResponseRedirect(reverse('activity'))
+
+
+def schedule(request):
+    return render(request, "trainers/schedule.html")

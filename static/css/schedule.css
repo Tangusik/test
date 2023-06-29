@@ -1,0 +1,108 @@
+/* вся страница */
+#cal-wrap * {
+  text-align: center;
+  margin: auto;
+}
+#cal-wrap {
+  margin-bottom: 100px;
+}
+.ninja {
+  display: none !important;
+}
+/* CONTAINER */
+#cal-container {
+max-width: 1200px;
+  margin-top: 20px;
+}
+/* ВЫБОР ПЕРИОДА */
+#cal-date {
+display: flex;
+  height: 20px;
+
+}
+#cal-mth, #cal-yr {
+box-sizing: border-box;
+padding: 10px 20px;
+font-size: 1.2em;
+border: 0;
+  color: #293241;
+}
+/* КАЛЕНДАРЬ */
+#calendar {
+  table-layout: fixed;
+  word-break: break-all;
+width: 100%;
+border-collapse: collapse;
+}
+#calendar tr.head td {
+font-weight: bold;
+text-transform: uppercase;
+color: #fff;
+background: #3D5A80;
+padding: 15px;
+text-align: center;
+}
+#calendar tr.day td {
+border: 1px solid #ddd;
+width: 14.28%;
+padding: 75px 5px;
+vertical-align: top;
+}
+#calendar tr.day td:hover {
+background: #fff9e4;
+cursor: pointer;
+}
+#calendar tr td.blank {
+background: #f5f5f5;
+}
+#calendar tr td.today {
+background: #98C1D9;
+}
+#calendar .dd {
+font-size: 1.2em;
+color: #999;
+text-align: right;
+  margin-top: -60px;
+}
+#calendar .evt {
+margin-top: 5px;
+font-size: 0.8em;
+font-weight: bold;
+overflow: hidden;
+color: #3D5A80;
+}
+/* ДОБАВИТЬ/РЕДАКТИРОВАТЬ СОБЫТИЕ */
+#cal-event {
+  max-width: 1000px;
+  table-layout: fixed;
+padding: 15px;
+margin-top: 20px;
+background: #f5f5f5;
+border: 1px solid #ddd;
+}
+#cal-event h1 {
+color: #333;
+padding: 0;
+margin: 0;
+}
+#evt-date {
+color: #555;
+margin: 10px 0;
+}
+#cal-event textarea {
+display: block;
+box-sizing: border-box;
+width: 100%;
+padding: 10px;
+margin: 10px 0;
+border: 1px solid #ddd;
+min-height: 100px;
+}
+#cal-event input[type=button], #cal-event input[type=submit] {
+padding: 10px;
+margin: 5px;
+font-size: 1.2em;
+border: 0;
+background: #3D5A80;
+color: #fff;
+}
