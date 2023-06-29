@@ -3,6 +3,8 @@
 <link rel="stylesheet" href="../../../static/css/index.css">
 <link rel="stylesheet" href="../../../static/css/slider.css">
 <link rel="stylesheet" href="../../../static/css/rectangles.css">
+<link rel="stylesheet" href="../../../static/css/form.css">
+<link rel="stylesheet" href="../../../static/css/edit_modal.css">
 {% endblock %}
 
 {% block content %}
@@ -21,6 +23,27 @@
     </div>
 </div>
 
+<div class="modal">
+    <div class="modal-content">
+        <div class="close">&times;</div>
+        <div class="form">
+            <form class="decor" action="#" method="post">
+                {% csrf_token %}
+                <div class="form-left-decoration"></div>
+                <div class="form-right-decoration"></div>
+                <div class="circle"></div>
+                <div class="form-inner">
+                    <h3>Редактирование пользователя</h3>
+                    <input type="text" id="name" value="{{userinfo.first_name}}" placeholder="Имя">
+                    <input type="text" id="last_name" value="{{userinfo.last_name}}" placeholder="Фамилия">
+                    <input type="text" id="otchestcv" value="{{trainer.otchestv}}" placeholder="Отчество">
+                    <input type="text" id="email" value="{{userinfo.email}}" placeholder="Почта">
+                    <input type="submit" value="Добавить">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 
 <div id="todo">
@@ -106,7 +129,6 @@
     <button class="prevSlider">Prev</button>
     <button class="nextSlider">Next</button>
 </div>
-
 
 
 {% endblock %}

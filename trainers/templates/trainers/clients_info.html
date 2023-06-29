@@ -3,6 +3,8 @@
 {% block head %}
 <link rel="stylesheet" href="../../../static/css/student.css">
 <link rel="stylesheet" href="../../../static/css/rectangles.css">
+<link rel="stylesheet" href="../../../static/css/edit_modal.css">
+<link rel="stylesheet" href="../../../static/css/form.css">
 {% endblock %}
 {% block content %}
 
@@ -12,15 +14,38 @@
         <div id="student_data">
             <h3>{{client.first_name}} {{client.last_name}}</h3>
             <h2>Баланс: {{client.balance}}</h2>
-            <h4>Студент.Группа1</h4>
+            <h4>Студент.Группа</h4>
 
 
             {% for adres in adr %}
             <p> {{adres.city}}, {{adres.street}}, {{adres.house}}, {{adres.building}}, {{adres.flat}} </p>
             {% endfor %}
-            <button class="btn">Редактировать</button>
+            <button class="change_btn" style="margin-top: 30px" onclick="edit_data()">Редактировать</button>
         </div>
     </div>
+
+    <div class="modal">
+        <div class="modal-content">
+            <div class="close">&times;</div>
+            <div class="form">
+                <form class="decor" action="#" method="post">
+                    {% csrf_token %}
+                    <div class="form-left-decoration"></div>
+                    <div class="form-right-decoration"></div>
+                    <div class="circle"></div>
+                    <div class="form-inner">
+                        <h3>Редактирование ученика</h3>
+                        <input type="text" id="name" value="{{client.first_name}}" placeholder="Имя">
+                        <input type="text" id="last_name" value="{{client.last_name}}" placeholder="Фамилия">
+                        <input type="text" id="balance" value="{{client.balance}}" placeholder="Баланс">
+                        <input type="text" id="email" value="{{userinfo.email}}" placeholder="Почта">
+                        <input type="submit" value="Добавить">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
 
     <div class="main">
 
@@ -90,21 +115,7 @@
 {% endblock %}
 
 
-<!--БЫЛО ДО-->
 
-
-
-<!--<h1> Info about client </h1>-->
-
-<!--<p> name: {{client.first_name}} </p>-->
-<!--<p> surname: {{client.last_name}}</p>-->
-<!--<p> birth_date: {{client.birth_date}}</p>-->
-
-<!--<p>Баланс: {{client.balance}}</p>-->
-
-<!--<h2> Adresses </h2>-->
-
-
-<!--{% for adres in adr %}-->
-<!--<p> {{adres.city}}, {{adres.street}}, {{adres.house}}, {{adres.building}}, {{adres.flat}} </p>-->
-<!--{% endfor %}-->
+{% block js%}
+<script src="../../../static/js/edit_data.js"></script>
+{% endblock %}
