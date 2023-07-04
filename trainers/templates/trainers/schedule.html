@@ -2,10 +2,14 @@
 
 {% block head %}
     <link href="../../../static/css/schedule.css" rel="stylesheet">
-    <script async src="../../../static/js/schedule.js"></script>
-
 {% endblock %}
 {% block content %}
+ <script>
+         window.activities = JSON.parse('{{ activities|safe }}');
+ </script>
+<script src="../../../static/js/schedule.js"></script>
+
+
     <div id="cal-wrap">
         <h1>Расписание</h1>
         <!-- ВЫБОР ПЕРИОДА -->

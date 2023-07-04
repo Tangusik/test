@@ -1,28 +1,28 @@
-<h1>Занятие</h1>
-<p>Дата: {{act.act_date}}</p>
-<p>Время: {{act.act_time_begin}} - {{act.act_time_end}}
+<!--<h1>Занятие</h1>-->
+<!--<p>Дата: {{act.act_date}}</p>-->
+<!--<p>Время: {{act.act_time_begin}} - {{act.act_time_end}}-->
 
-<form action="{% url 'activity' %}/{{act.id}}/change" method="post">
-    {% csrf_token %}
+<!--<form action="{% url 'activity' %}/{{act.id}}/change" method="post">-->
+<!--    {% csrf_token %}-->
 
-<p>
-    <select name="status">
-        <option value="Состоится"> Состоится </option>
-        <option value="Проведено"> Проведено </option>
-        <option value="Отменено"> Отменено </option>
-    </select>
-</p>
+<!--<p>-->
+<!--    <select name="status">-->
+<!--        <option value="Состоится"> Состоится </option>-->
+<!--        <option value="Проведено"> Проведено </option>-->
+<!--        <option value="Отменено"> Отменено </option>-->
+<!--    </select>-->
+<!--</p>-->
 
-<p>Участники:
+<!--<p>Участники:-->
 
-{% for  client in clients %}
-<ul>
+<!--{% for  client in clients %}-->
+<!--<ul>-->
 
-<li> <input type="checkbox" name="client" value="{{client.id}}"> {{client.first_name}} {{client.last_name}}</li>
+<!--<li> <input type="checkbox" name="client" value="{{client.id}}"> {{client.first_name}} {{client.last_name}}</li>-->
 
-</ul>
+<!--</ul>-->
 
 
-{% endfor %}
-    <p><input type="submit" value="Cохранить"></p>
-</form>
+<!--{% endfor %}-->
+<!--    <p><input type="submit" value="Cохранить"></p>-->
+<!--</form>-->

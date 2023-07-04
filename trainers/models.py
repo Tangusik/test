@@ -22,6 +22,11 @@ class Trainer(models.Model):
     def __str__(self):
         return self.user.first_name
 
+    def to_json(self):
+        return {
+            'name': self.user.name
+        }
+
 
 class Address(models.Model):
     city = models.CharField(blank=False, default='123', max_length=30)
@@ -53,12 +58,21 @@ class Activity(models.Model):
     act_time_begin = models.TimeField(auto_now=False)
     act_time_end = models.TimeField(auto_now=False)
     clients = models.ManyToManyField(Client)
-    trainer = models.ForeignKey(Trainer, on_delete=models.DO_NOTHING)
+    # trainer = models.ForeignKey(Trainer, on_delete=models.DO_NOTHING)
     status = models.CharField(max_length=20, default="Состоится")
 
-    def __str__(self):
-        act_name = self.act_date + " - " + self.act_time_begin
-        return self.act_name
+    def to_json(self):
+        return {
+            'price': self.price,
+            'act_date': self.act_date.strftime('%Y-%m-%d'),
+            'act_time_begin': self.act_time_begin.strftime('%H:%M:%S'),
+            'act_time_end': self.act_time_end.strftime('%H:%M:%S'),
+            'clients': [client.id for client in self.clients.all()],
+            # 'trainer': self.trainer.name,
+            'status': self.status,
+        }
+
+
 
 class News(models.Model):
     title = models.CharField(max_length=200)

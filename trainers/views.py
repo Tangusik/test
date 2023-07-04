@@ -6,7 +6,9 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.core.serializers import serialize
 from django.shortcuts import get_object_or_404
+import json
 
 
 def login_page(request):
@@ -145,45 +147,58 @@ def trainers_add_action(request):
         return HttpResponseRedirect(reverse('trainers'))
     except:
         return HttpResponseRedirect(reverse('trainers'))
-
-def activity(request):
-    if request.user.is_authenticated:
-        activity_list = Activity.objects.all()
-        context = {'acts': activity_list}
-        return render(request, "trainers/activities.html", context)
-    else:
-        return HttpResponseRedirect(reverse('login_page'))
-
-
-def activity_info(request, activity_id):
-    if request.user.is_authenticated:
-        act = get_object_or_404(Activity, pk=activity_id)
-        clients = act.clients.all()
-        context = {'act': act, 'clients': clients}
-        return render(request, "trainers/act_info.html", context)
-    else:
-        return HttpResponseRedirect(reverse('login_page'))
-
-
-def activity_change(request, activity_id):
-    status = request.POST['status']
-    client_who_was = request.POST.getlist('client')
-    act = get_object_or_404(Activity, pk=activity_id)
-    try:
-        if status == "Состоится":
-            for id in client_who_was:
-                client = get_object_or_404(Client, pk=id)
-                client.balance = client.balance - act.price
-                client.save()
-            act.status = status
-            act.save()
-        elif status == "Отменено":
-            act.status = status
-            act.save()
-        return HttpResponseRedirect(reverse('activity'))
-    except:
-        return HttpResponseRedirect(reverse('activity'))
+#
+# def activity(request):
+#     if request.user.is_authenticated:
+#         activity_list = Activity.objects.all()
+#         context = {'activities': activity_list}
+#         return render(request, "trainers/schedule.html", context)
+#     else:
+#         return HttpResponseRedirect(reverse('login_page'))
+#
+#
+# def activity_info(request, activity_id):
+#     if request.user.is_authenticated:
+#         act = get_object_or_404(Activity, pk=activity_id)
+#         clients = act.clients.all()
+#         context = {'act': act, 'clients': clients}
+#         return render(request, "trainers/act_info.html", context)
+#     else:
+#         return HttpResponseRedirect(reverse('login_page'))
+#
+#
+# def activity_change(request, activity_id):
+#     status = request.POST['status']
+#     client_who_was = request.POST.getlist('client')
+#     act = get_object_or_404(Activity, pk=activity_id)
+#     try:
+#         if status == "Состоится":
+#             for id in client_who_was:
+#                 client = get_object_or_404(Client, pk=id)
+#                 client.balance = client.balance - act.price
+#                 client.save()
+#             act.status = status
+#             act.save()
+#         elif status == "Отменено":
+#             act.status = status
+#             act.save()
+#         return HttpResponseRedirect(reverse('activity'))
+#     except:
+#         return HttpResponseRedirect(reverse('activity'))
 
 
 def schedule(request):
-    return render(request, "trainers/schedule.html")
+    # if request.user.is_authenticated:
+    #     activities = Activity.objects.all()
+    #     json_activities = serialize('json', activities)
+    #     context = {'json_activities': json_activities}
+    #     return render(request, "trainers/schedule.html", context)
+    # else:
+    #     return HttpResponseRedirect(reverse('login_page'))
+    if request.user.is_authenticated:
+        activities = Activity.objects.all()
+        context = [activity.to_json() for activity in activities]
+        context = json.dumps(context)
+        return render(request, "trainers/schedule.html", {'activities': context})
+    else:
+        return HttpResponseRedirect(reverse('login_page'))
