@@ -52,7 +52,8 @@ def main(request):
 def clients(request):
     if request.user.is_authenticated:
         clients = Client.objects.all()
-        context = {'clients': clients}
+        team = Team.objects.all()
+        context = {'clients': clients, 'teams': team}
         return render(request, "trainers/clients.html", context)
     else:
         return HttpResponseRedirect(reverse('login_page'))
@@ -188,13 +189,6 @@ def trainers_add_action(request):
 
 
 def schedule(request):
-    # if request.user.is_authenticated:
-    #     activities = Activity.objects.all()
-    #     json_activities = serialize('json', activities)
-    #     context = {'json_activities': json_activities}
-    #     return render(request, "trainers/schedule.html", context)
-    # else:
-    #     return HttpResponseRedirect(reverse('login_page'))
     if request.user.is_authenticated:
         activities = Activity.objects.all()
         context = [activity.to_json() for activity in activities]

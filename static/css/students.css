@@ -1,6 +1,21 @@
-#cards {
+#main_student_content{
+        background-color: rgb(152, 193, 217, 0.7);
+}
+
+#all_clients{
+    display: none;
+}
+
+#all_groups{
+    display: none;
+}
+
+#all_sports{
+    display: none;
+}
+
+.cards {
     overflow: hidden;
-    background-color: rgb(152, 193, 217, 0.7);
     height: 100%;
     padding-right: 2em;
     min-height: 650px;
@@ -10,7 +25,6 @@
     background-color: rgb(152, 193, 217, 0.7);
     padding-top: 1em;
     text-align: center;
-
     color: #293241;
 }
 
@@ -106,3 +120,4 @@ summary{
         font-size: 0.6em;
     }
 }
+

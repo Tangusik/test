@@ -71,6 +71,10 @@ font-weight: bold;
 overflow: hidden;
 color: #3D5A80;
 }
+
+
+
+
 /* ДОБАВИТЬ/РЕДАКТИРОВАТЬ СОБЫТИЕ */
 #cal-event {
   max-width: 1000px;
@@ -105,4 +109,9 @@ font-size: 1.2em;
 border: 0;
 background: #3D5A80;
 color: #fff;
+}
+
+#calendar .dd  .desc {
+  color: #293241;
+  font-size: 0.7em;
 }
