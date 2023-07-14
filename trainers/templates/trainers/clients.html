@@ -7,10 +7,11 @@
 
 {% block content %}
 <div id="main_student_content">
+    <div id="buttons">
     <button class="change_btn" onclick="showAllClients()">Все клиенты</button>
     <button class="change_btn" onclick="showAllGroups()">Группы</button>
     <button class="change_btn" onclick="showAllSports()">Вид спорта</button>
-
+    </div>
     <div id="all_clients">
         <div class="cards">
             {%if clients%}
@@ -150,14 +151,14 @@
         </div>
     </div>
     <div id="all_sports">
-        {% for team in teams_by_sport %}
-        <h3>{{ team.sport }} ({{ team.total }})</h3>
-         <ul>
+       {% for sport, teams in teams_by_sport.items %}
+    <h3>{{ sport }} ({{ teams.count }})</h3>
+    <ul>
         {% for team in teams %}
             <li>{{ team.name }}</li>
         {% endfor %}
     </ul>
-        {% endfor %}
+{% endfor %}
     </div>
 </div>
 

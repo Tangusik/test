@@ -53,10 +53,15 @@ def main(request):
 def clients(request):
     if request.user.is_authenticated:
         clients = Client.objects.all()
-        team = Team.objects.all()
+        all_team = Team.objects.all()
         teams_by_sport = Team.objects.values('sport').annotate(total=Count('id')).order_by('-total')
+        teams_by_sport_dict = {}
 
-        context = {'clients': clients, 'teams': team, 'teams_by_sport': teams_by_sport}
+        for team in teams_by_sport:
+            teams = Team.objects.filter(sport=team['sport'])
+            teams_by_sport_dict[team['sport']] = teams
+
+        context = {'clients': clients, 'teams': all_team, 'teams_by_sport': teams_by_sport_dict}
         return render(request, "trainers/clients.html", context)
     else:
         return HttpResponseRedirect(reverse('login_page'))

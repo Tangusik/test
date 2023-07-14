@@ -1,16 +1,26 @@
-#main_student_content{
-        background-color: rgb(152, 193, 217, 0.7);
+#main_student_content {
+    padding-top: 1em;
+    padding-bottom: 1em;
+    min-height: 45em;
+    background-color: rgb(152, 193, 217, 0.7);
 }
 
-#all_clients{
+#buttons{
+      display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+
+#all_clients {
     display: none;
 }
 
-#all_groups{
+#all_groups {
     display: none;
 }
 
-#all_sports{
+#all_sports {
     display: none;
 }
 
@@ -28,7 +38,7 @@
     color: #293241;
 }
 
-.cards_elements{
+.cards_elements {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -81,25 +91,27 @@
     transform: perspective(1200px) rotateY(180deg);
 }
 
-.card p{
+.card p {
     color: #dddddd;
     margin-bottom: 20px;
 }
-.card h1{
+
+.card h1 {
     color: #F1FFFF;
     margin-bottom: 50px;
 }
 
-summary{
+summary {
     color: #3c3c3c;
     padding-left: 20px;
     margin-top: 20px;
     margin-left: 50px;
     font-size: 20px;
-    list-style: none; !important;
+    list-style: none;
+!important;
 }
 
-.add_group{
+.add_group {
     margin-top: 10em;
     color: #293241;
 }
