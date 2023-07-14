@@ -1,120 +1,120 @@
-{% extends 'trainers/base.html' %}
+<!--{% extends 'trainers/base.html' %}-->
 
-{% block head %}
-<link rel="stylesheet" href="../../../static/css/students.css">
-<link rel="stylesheet" href="../../../static/css/form.css">
-{% endblock %}
+<!--{% block head %}-->
+<!--<link rel="stylesheet" href="../../../static/css/students.css">-->
+<!--<link rel="stylesheet" href="../../../static/css/form.css">-->
+<!--{% endblock %}-->
 
-{% block content %}
-<div class="cards">
-    {%if teams%}
-    {% for team in teams %}
-    <details>
-        <summary><b>{{team.name}}</b> {{team.trainer.user.last_name}} {{team.trainer.user.first_name}}
-            {{team.trainer.otchestv}}
-        </summary>
-        <div class="cards_elements">
-            {% for client in team.clients.all %}
-            <div class="card">
-                <div class="front">
-                    <p>{{client.birth_date}}</p>
-                    <h1>
-                        {{client.first_name}} {{client.last_name}}
-                    </h1>
-                    <p>Студент.Описание
-                    </p>
-                </div>
-                <div class="back">
-                    <p>{{client.birth_date}}</p>
-                    <h1>
-                        {{client.first_name}} {{client.last_name}}
-                    </h1>
-                    <p><a href="client/{{client.id}}">Студент.Ссылка</a></p>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-    </details>
-    {% endfor %}
-    {% else %}
-    <p>Нет групп</p>
-    {%endif%}
-</div>
-<div class="common_form">
-    <div class="teams_btn">
-        <button class="change_btn" onclick="showGroupForm()"> Создать группу</button>
-        <button class="change_btn" onclick="showClientForm()"> Добавить клиента</button>
-    </div>
-    <div class="teams_forms">
-        <div class="form" id="form_add_team">
-            <form class="decor" action="{% url 'team_add_action' %}" method="post">
-                {% csrf_token %}
-                <div class="form-left-decoration"></div>
-                <div class="form-right-decoration"></div>
-                <div class="circle"></div>
-                <div class="form-inner">
-                    <h3>Добавление группы</h3>
-                    <input type="text" id="name" placeholder="Название">
-                    <p>
-                        <select multiple name="members" class="select">
-                            {% for client in clients %}
-                            <option value="{{client.id}}">{{client.first_name}} {{client.last_name}}</option>
-                            {% endfor %}
-                        </select>
-                    </p>
-                    <p>Тренер:</p>
-                    <p>
-                        <select name="trainer" class="select">
-                            {% for trainer in trainers %}
-                            <option value="{{trainer.user.id}}">{{trainer.user.first_name}}
-                                {{trainer.user.last_name}}
-                            </option>
-                            {% endfor %}
-                        </select>
-                    </p>
-                    <p>Занятия:</p>
-                    <p>До какого числа будут проходить занятия: <input type="date" name="date_end"></p>
-                    <p>Дни недели:
-                        <select multiple name="days" class="select">
-                            <option value="0">Понедельник</option>
-                            <option value="1">Вторник</option>
-                            <option value="2">Среда</option>
-                            <option value="3">Четверг</option>
-                            <option value="4">Пятница</option>
-                            <option value="5">Суббота</option>
-                            <option value="6">Воскресенье</option>
-                        </select></p>
-                    <input type="time" name="act_begin_time" placeholder="Время начала занятий">
-                    <input type="time" name="act_end_time" placeholder="Время конца занятий">
-                    <input type="text" maxlength="20" name="price" placeholder="Цена">
+<!--{% block content %}-->
+<!--<div class="cards">-->
+<!--    {%if teams%}-->
+<!--    {% for team in teams %}-->
+<!--    <details>-->
+<!--        <summary><b>{{team.name}}</b> {{team.trainer.user.last_name}} {{team.trainer.user.first_name}}-->
+<!--            {{team.trainer.otchestv}}-->
+<!--        </summary>-->
+<!--        <div class="cards_elements">-->
+<!--            {% for client in team.clients.all %}-->
+<!--            <div class="card">-->
+<!--                <div class="front">-->
+<!--                    <p>{{client.birth_date}}</p>-->
+<!--                    <h1>-->
+<!--                        {{client.first_name}} {{client.last_name}}-->
+<!--                    </h1>-->
+<!--                    <p>Студент.Описание-->
+<!--                    </p>-->
+<!--                </div>-->
+<!--                <div class="back">-->
+<!--                    <p>{{client.birth_date}}</p>-->
+<!--                    <h1>-->
+<!--                        {{client.first_name}} {{client.last_name}}-->
+<!--                    </h1>-->
+<!--                    <p><a href="client/{{client.id}}">Студент.Ссылка</a></p>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            {% endfor %}-->
+<!--        </div>-->
+<!--    </details>-->
+<!--    {% endfor %}-->
+<!--    {% else %}-->
+<!--    <p>Нет групп</p>-->
+<!--    {%endif%}-->
+<!--</div>-->
+<!--<div class="common_form">-->
+<!--    <div class="teams_btn">-->
+<!--        <button class="change_btn" onclick="showGroupForm()"> Создать группу</button>-->
+<!--        <button class="change_btn" onclick="showClientForm()"> Добавить клиента</button>-->
+<!--    </div>-->
+<!--    <div class="teams_forms">-->
+<!--        <div class="form" id="form_add_team">-->
+<!--            <form class="decor" action="{% url 'team_add_action' %}" method="post">-->
+<!--                {% csrf_token %}-->
+<!--                <div class="form-left-decoration"></div>-->
+<!--                <div class="form-right-decoration"></div>-->
+<!--                <div class="circle"></div>-->
+<!--                <div class="form-inner">-->
+<!--                    <h3>Добавление группы</h3>-->
+<!--                    <input type="text" id="name" placeholder="Название">-->
+<!--                    <p>-->
+<!--                        <select multiple name="members" class="select">-->
+<!--                            {% for client in clients %}-->
+<!--                            <option value="{{client.id}}">{{client.first_name}} {{client.last_name}}</option>-->
+<!--                            {% endfor %}-->
+<!--                        </select>-->
+<!--                    </p>-->
+<!--                    <p>Тренер:</p>-->
+<!--                    <p>-->
+<!--                        <select name="trainer" class="select">-->
+<!--                            {% for trainer in trainers %}-->
+<!--                            <option value="{{trainer.user.id}}">{{trainer.user.first_name}}-->
+<!--                                {{trainer.user.last_name}}-->
+<!--                            </option>-->
+<!--                            {% endfor %}-->
+<!--                        </select>-->
+<!--                    </p>-->
+<!--                    <p>Занятия:</p>-->
+<!--                    <p>До какого числа будут проходить занятия: <input type="date" name="date_end"></p>-->
+<!--                    <p>Дни недели:-->
+<!--                        <select multiple name="days" class="select">-->
+<!--                            <option value="0">Понедельник</option>-->
+<!--                            <option value="1">Вторник</option>-->
+<!--                            <option value="2">Среда</option>-->
+<!--                            <option value="3">Четверг</option>-->
+<!--                            <option value="4">Пятница</option>-->
+<!--                            <option value="5">Суббота</option>-->
+<!--                            <option value="6">Воскресенье</option>-->
+<!--                        </select></p>-->
+<!--                    <input type="time" name="act_begin_time" placeholder="Время начала занятий">-->
+<!--                    <input type="time" name="act_end_time" placeholder="Время конца занятий">-->
+<!--                    <input type="text" maxlength="20" name="price" placeholder="Цена">-->
 
-                    <input type="submit" value="Добавить">
-                </div>
-            </form>
-        </div>
-        <div class="form" id="form_add_client">
-            <form class="decor" action="{% url 'client_add_action' %}" method="post">
-                {% csrf_token %}
-                <div class="form-left-decoration"></div>
-                <div class="form-right-decoration"></div>
-                <div class="circle"></div>
-                <div class="form-inner">
-                    <h3>Добавление клиента</h3>
-                    <input type="text" name="client_name" id="client_name" placeholder="Имя">
-                    <input type="text" name="client_surname" id="client_surname" placeholder="Фамилия">
-                    <input type="date" name="client_birthdate" id="client_birthdate"
-                           placeholder="Дата рождения">
-                    <input type="submit" value="Добавить">
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-{% endblock %}
+<!--                    <input type="submit" value="Добавить">-->
+<!--                </div>-->
+<!--            </form>-->
+<!--        </div>-->
+<!--        <div class="form" id="form_add_client">-->
+<!--            <form class="decor" action="{% url 'client_add_action' %}" method="post">-->
+<!--                {% csrf_token %}-->
+<!--                <div class="form-left-decoration"></div>-->
+<!--                <div class="form-right-decoration"></div>-->
+<!--                <div class="circle"></div>-->
+<!--                <div class="form-inner">-->
+<!--                    <h3>Добавление клиента</h3>-->
+<!--                    <input type="text" name="client_name" id="client_name" placeholder="Имя">-->
+<!--                    <input type="text" name="client_surname" id="client_surname" placeholder="Фамилия">-->
+<!--                    <input type="date" name="client_birthdate" id="client_birthdate"-->
+<!--                           placeholder="Дата рождения">-->
+<!--                    <input type="submit" value="Добавить">-->
+<!--                </div>-->
+<!--            </form>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+<!--{% endblock %}-->
 
-{% block js%}
-<script src="../../../static/js/buttons.js"></script>
-{% endblock %}
+<!--{% block js%}-->
+<!--<script src="../../../static/js/buttons.js"></script>-->
+<!--{% endblock %}-->
 
 
 

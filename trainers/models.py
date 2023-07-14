@@ -44,8 +44,11 @@ class Team(models.Model):
     name = models.CharField(max_length=20, default="qwerty")
     clients = models.ManyToManyField(Client)
     trainer = models.ForeignKey(Trainer, models.CASCADE, blank=True, null=True)
+    sport = models.CharField(blank=True, max_length=30, null=True)
+
     def __str__(self):
         return self.name
+
 
 class Activity(models.Model):
     price = models.IntegerField(blank=False, default=0)
@@ -66,7 +69,6 @@ class Activity(models.Model):
             'trainer': self.trainer.user.first_name,
             'status': self.status,
         }
-
 
 
 class News(models.Model):

@@ -33,7 +33,6 @@ var groups = document.getElementById("all_groups");
 var sports = document.getElementById("all_sports");
 
 function showAllClients() {
-    // var clients = document.getElementById("all_clients");
     if (clients.style.display === "none") {
         clients.style.display = "block";
         groups.style.display = "none";
@@ -46,7 +45,6 @@ function showAllClients() {
 
 
 function showAllGroups() {
-    // var groups = document.getElementById("all_groups");
     if (groups.style.display === "none") {
         groups.style.display = "block";
         clients.style.display = "none";
@@ -58,7 +56,6 @@ function showAllGroups() {
 
 
 function showAllSports() {
-    // var sports = document.getElementById("all_sports");
     if (sports.style.display === "none") {
         sports.style.display = "block";
           groups.style.display = "none";

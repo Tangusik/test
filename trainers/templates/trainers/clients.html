@@ -149,6 +149,16 @@
             </div>
         </div>
     </div>
+    <div id="all_sports">
+        {% for team in teams_by_sport %}
+        <h3>{{ team.sport }} ({{ team.total }})</h3>
+         <ul>
+        {% for team in teams %}
+            <li>{{ team.name }}</li>
+        {% endfor %}
+    </ul>
+        {% endfor %}
+    </div>
 </div>
 
 {% endblock %}

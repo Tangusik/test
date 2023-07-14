@@ -1,4 +1,4 @@
-import datetime, calendar
+import datetime
 
 from django.shortcuts import render
 from .models import Client, Address, Team, Trainer, Activity
@@ -6,9 +6,10 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from django.core.serializers import serialize
+from django.db.models import Count
 from django.shortcuts import get_object_or_404
 import json
+
 
 
 def login_page(request):
@@ -53,7 +54,9 @@ def clients(request):
     if request.user.is_authenticated:
         clients = Client.objects.all()
         team = Team.objects.all()
-        context = {'clients': clients, 'teams': team}
+        teams_by_sport = Team.objects.values('sport').annotate(total=Count('id')).order_by('-total')
+
+        context = {'clients': clients, 'teams': team, 'teams_by_sport': teams_by_sport}
         return render(request, "trainers/clients.html", context)
     else:
         return HttpResponseRedirect(reverse('login_page'))
@@ -97,6 +100,7 @@ def team_add_action(request):
     act_begin_time = request.POST['act_begin_time']
     act_end_time = request.POST['act_end_time']
     price = request.POST['price']
+    sport = request.POST['sport']
     try:
         tr = get_object_or_404(Trainer, pk=trainer)
         team = Team.objects.create(name=team_name, trainer=tr)
