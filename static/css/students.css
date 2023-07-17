@@ -1,12 +1,25 @@
 #main_student_content {
+    padding-top: 5em;
+    padding-bottom: 1em;
+    min-height: 45em;
+    background-color: rgb(152, 193, 217, 0.7);
+}
+
+#trainers_content {
     padding-top: 1em;
     padding-bottom: 1em;
     min-height: 45em;
     background-color: rgb(152, 193, 217, 0.7);
 }
 
-#buttons{
-      display: flex;
+.change_btn.active {
+    border: 1px #3D5A80 solid;
+    background-color: #dddddd;
+     color: #293241;
+}
+
+#buttons {
+    display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: flex-start;
@@ -29,13 +42,6 @@
     height: 100%;
     padding-right: 2em;
     min-height: 650px;
-}
-
-#my_students {
-    background-color: rgb(152, 193, 217, 0.7);
-    padding-top: 1em;
-    text-align: center;
-    color: #293241;
 }
 
 .cards_elements {

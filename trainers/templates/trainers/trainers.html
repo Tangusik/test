@@ -5,8 +5,7 @@
 {% endblock %}
 
 {% block content %}
-
-<h2 id="my_students">Мои коллеги</h2>
+<div id="trainers_content">
 <div id="cards">
     {%if trainers %}
     <div class="cards_elements">
@@ -28,7 +27,7 @@
                 <p> {% if trainer.team_set.all %}
                 <ul>
                     {% for team in trainer.team_set.all %}
-                    <li><a href="{% url 'teams' %}/{{team.id}}">{{ team.name }} </a></li>
+                    <li><a href="#">{{ team.name }} </a></li>
                     {% endfor %}
                 </ul>
 
@@ -65,7 +64,7 @@
         </form>
     </div>
 </div>
-
+</div>
 
 {% endblock %}
 
