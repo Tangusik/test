@@ -1,0 +1,53 @@
+#main_student_content {
+    padding-top: 5em;
+    padding-bottom: 1em;
+    min-height: 45em;
+    background-color: rgb(152, 193, 217, 0.7);
+}
+
+#trainers_content {
+    padding-top: 1em;
+    padding-bottom: 1em;
+    min-height: 45em;
+    background-color: rgb(152, 193, 217, 0.7);
+}
+
+.change_btn.active {
+    border: 1px #3D5A80 solid;
+    background-color: #dddddd;
+    color: #293241;
+}
+
+#buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-start;
+    margin-bottom: 4em;
+}
+
+#all_clients {
+    display: none;
+}
+
+#all_groups {
+    display: none;
+}
+
+#all_sports {
+    display: none;
+}
+
+.teams_btn {
+    padding-top: 3em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding-bottom: 2em;
+}
+
+#add_trainer_button{
+    display: block;
+    margin: 0 auto;
+}

@@ -267,7 +267,6 @@
 @media (max-width: 900px) {
     #search_div {
         flex-direction: column;
-        /*height: 2;*/
     }
 }
 

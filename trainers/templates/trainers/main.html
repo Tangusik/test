@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="../../../static/css/rectangles.css">
 <link rel="stylesheet" href="../../../static/css/form.css">
 <link rel="stylesheet" href="../../../static/css/edit_modal.css">
+<link rel="stylesheet" href="../../../static/css/btns.css">
 {% endblock %}
 
 {% block content %}
@@ -19,13 +20,13 @@
         <h4>Тренер</h4>
         {% endif %}
         <h4>{{trainer.birthdate}}</h4>
-        <button class="change_btn" style="margin-top: 30px" onclick="edit_data()">Редактировать</button>
+        <button class="change_btn" style="margin-top: 30px" onclick="edit_data_modal()">Редактировать</button>
     </div>
 </div>
 
-<div class="modal">
+<div class="modal" id="modal_edit_data">
     <div class="modal-content">
-        <div class="close">&times;</div>
+        <div class="close" id="close_edit_data">&times;</div>
         <div class="form">
             <form class="decor" action="#" method="post">
                 {% csrf_token %}
@@ -136,5 +137,16 @@
 {% block js%}
 <script src="../../../static/js/slider.js"></script>
 <script src="../../../static/js/todo.js"></script>
-<script src="../../../static/js/edit_data.js"></script>
+<script>
+    let modal = document.querySelector('#modal_edit_data');
+
+    function edit_data_modal() {
+        modal.style.display = 'block';
+    }
+
+    let btn = document.querySelector('#close_edit_data');
+    btn.onclick = function () {
+        modal.style.display = 'none';
+    }
+</script>
 {% endblock %}

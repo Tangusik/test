@@ -25,14 +25,14 @@
             <a href="{% url 'schedule' %}">Расписание</a>
             <a href="{% url 'main' %}">Главная</a>
         </div>
-        <form action="{% url 'logout' %}">
-    <input id="exit" type="submit" value="Выйти">
-</form>
+        <form id="form_logout" action="{% url 'logout' %}">
+            <input id="exit" type="submit" value="Выйти">
+        </form>
     </div>
 </header>
 
-  {% block content %}
-  {% endblock %}
+{% block content %}
+{% endblock %}
 
 <footer id="footer">
     <div class="nav_footer">
@@ -54,8 +54,8 @@
 
 
 <script src="../../../static/js/text.js"></script>
-  {% block js%}
-  {% endblock %}
+{% block js%}
+{% endblock %}
 
 </body>
 </html>

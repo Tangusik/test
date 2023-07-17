@@ -72,6 +72,10 @@ ul {
     margin-right: 3vw;
 }
 
+#form_logout{
+    text-align: center;
+}
+
 #exit {
     height: 2em;
     width: 6em;
@@ -97,6 +101,10 @@ ul {
 
     .nav button {
         width: 70px;
+    }
+
+    #exit {
+        margin-right: 0;
     }
 }
 

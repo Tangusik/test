@@ -2,72 +2,89 @@
 {% block head %}
 <link rel="stylesheet" href="../../../static/css/students.css">
 <link rel="stylesheet" href="../../../static/css/form.css">
+<link rel="stylesheet" href="../../../static/css/edit_modal.css">
+<link rel="stylesheet" href="../../../static/css/btns.css">
+
 {% endblock %}
 
 {% block content %}
 <div id="trainers_content">
-<div id="cards">
-    {%if trainers %}
-    <div class="cards_elements">
-        {% for trainer in trainers %}
-        <div class="card">
-            <div class="front">
-                <p> {{trainer.birthdate}}</p>
-                <h2>
-                    {{trainer.user.last_name}} <br> {{trainer.user.first_name}} <br> {{trainer.otchestv}}
-                </h2>
-                <p> Какое-нить описание
-                </p>
-            </div>
-            <div class="back">
-                <p> {{trainer.birthdate}}</p>
-                <h2>
-                    {{trainer.user.last_name}} <br> {{trainer.user.first_name}} <br> {{trainer.otchestv}}
-                </h2>
-                <p> {% if trainer.team_set.all %}
-                <ul>
-                    {% for team in trainer.team_set.all %}
-                    <li><a href="#">{{ team.name }} </a></li>
-                    {% endfor %}
-                </ul>
-
-                {% else %}
-                <p>У тренера ещё нет групп.</p>
-                {% endif %}
-                </p>
+    <button id="add_trainer_button" class="change_btn" onclick="modal_trainer()"> Добавить тренера</button>
+    <div class="modal" id="modal_trainer">
+        <div class="modal-content">
+            <div class="close" id="close_trainer">&times;</div>
+            <div class="form">
+                <form class="decor" action="{% url 'trainers_add_action' %}" method="post">
+                    {% csrf_token %}
+                    <div class="form-left-decoration"></div>
+                    <div class="form-right-decoration"></div>
+                    <div class="circle"></div>
+                    <div class="form-inner">
+                        <h3>Добавление тренера</h3>
+                        <input type="text" name="name" placeholder="Имя">
+                        <input type="text" name="last_name" placeholder="Фамилия">
+                        <input type="text" name="otchestv" placeholder="Отчество">
+                        <input type="email" name="mail" placeholder="Почта">
+                        <input type="date" name="birth_date" placeholder="Дата рождения">
+                        <input type="text" name="password" placeholder="Пароль">
+                        <input type="submit" value="Добавить">
+                    </div>
+                </form>
             </div>
         </div>
-        {% endfor %}
-        {% else %}
-        <p>Коллег нет :(</p>
-        {%endif%}
     </div>
-</div>
-<div class="common_form">
-    <button class="change_btn" onclick="showTrainerForm()"> Добавить тренера</button>
-    <div class="form" id="form_add_trainer">
-        <form class="decor" action="{% url 'trainers_add_action' %}" method="post">
-            {% csrf_token %}
-            <div class="form-left-decoration"></div>
-            <div class="form-right-decoration"></div>
-            <div class="circle"></div>
-            <div class="form-inner">
-                <h3>Добавление тренера</h3>
-                <input type="text" name="name" placeholder="Имя">
-                <input type="text" name="last_name" placeholder="Фамилия">
-                <input type="text" name="otchestv" placeholder="Отчество">
-                <input type="email" name="mail" placeholder="Почта">
-                <input type="date" name="birth_date" placeholder="Дата рождения">
-                <input type="text" name="password" placeholder="Пароль">
-                <input type="submit" value="Добавить">
-            </div>
-        </form>
-    </div>
-</div>
-</div>
+    <div id="cards">
+        {%if trainers %}
+        <div class="cards_elements">
+            {% for trainer in trainers %}
+            <div class="card">
+                <div class="front">
+                    <p> {{trainer.birthdate}}</p>
+                    <h2>
+                        {{trainer.user.last_name}} <br> {{trainer.user.first_name}} <br> {{trainer.otchestv}}
+                    </h2>
+                    <p> Какое-нить описание
+                    </p>
+                </div>
+                <div class="back">
+                    <p> {{trainer.birthdate}}</p>
+                    <h2>
+                        {{trainer.user.last_name}} <br> {{trainer.user.first_name}} <br> {{trainer.otchestv}}
+                    </h2>
+                    <p> {% if trainer.team_set.all %}
+                    <ul>
+                        {% for team in trainer.team_set.all %}
+                        <li><a href="#">{{ team.name }} </a></li>
+                        {% endfor %}
+                    </ul>
 
+                    {% else %}
+                    <p>У тренера ещё нет групп.</p>
+                    {% endif %}
+                    </p>
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <p>Коллег нет :(</p>
+            {%endif%}
+        </div>
+    </div>
+</div>
 {% endblock %}
 
 {% block js%}
+<script>
+    let modal3 = document.querySelector('#modal_trainer');
+
+    function modal_trainer() {
+        modal3.style.display = 'block';
+    }
+
+    let btn3 = document.querySelector('#close_trainer');
+    btn3.onclick = function () {
+        modal3.style.display = 'none';
+    }
+</script>
 <script src="../../../static/js/buttons.js"></script>
 {% endblock %}

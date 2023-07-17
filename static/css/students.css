@@ -1,41 +1,3 @@
-#main_student_content {
-    padding-top: 5em;
-    padding-bottom: 1em;
-    min-height: 45em;
-    background-color: rgb(152, 193, 217, 0.7);
-}
-
-#trainers_content {
-    padding-top: 1em;
-    padding-bottom: 1em;
-    min-height: 45em;
-    background-color: rgb(152, 193, 217, 0.7);
-}
-
-.change_btn.active {
-    border: 1px #3D5A80 solid;
-    background-color: #dddddd;
-     color: #293241;
-}
-
-#buttons {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: flex-start;
-}
-
-#all_clients {
-    display: none;
-}
-
-#all_groups {
-    display: none;
-}
-
-#all_sports {
-    display: none;
-}
 
 .cards {
     overflow: hidden;
@@ -62,7 +24,7 @@
     cursor: pointer;
     transform: translate(-15%, 16%);
     border-radius: 30px;
-    z-index: 5;
+    z-index: 3;
     font-size: 0.8em;
 }
 
@@ -121,17 +83,6 @@ summary {
     margin-top: 10em;
     color: #293241;
 }
-
-
-.teams_btn {
-    padding-top: 3em;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    padding-bottom: 2em;
-}
-
 
 @media (max-width: 1150px) {
     .card {
