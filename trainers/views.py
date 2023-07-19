@@ -9,6 +9,7 @@ from django.urls import reverse
 from django.db.models import Count
 from django.shortcuts import get_object_or_404
 import json
+from django.db.models import Q
 
 
 
@@ -137,26 +138,27 @@ def trainers(request):
         trainers = Trainer.objects.all()
 
         today = date.today()
-
         trainers_birth = Trainer.objects.all().order_by('birthdate')
-
         upcoming_birthdays = []
         today_birthdays = []
-
         for trainer in trainers_birth:
             # вычисляем дату рождения тренера в этом году
             birthdate_this_year = date(today.year, trainer.birthdate.month, trainer.birthdate.day)
             if birthdate_this_year < today:
                 birthdate_this_year = date(today.year + 1, trainer.birthdate.month, trainer.birthdate.day)
-
             # вычисляем оставшееся время до дня рождения
             time_to_birthday = (birthdate_this_year - today).days
             if time_to_birthday <= 7 & time_to_birthday != 0:
                 upcoming_birthdays.append(trainer)
             if time_to_birthday == 0:
                     today_birthdays.append(trainer)
+        trainers_search = []
+        query = request.GET.get('q')
+        if query:
+            trainers_search = User.objects.filter(Q(first_name__icontains=query) | Q(email__icontains=query))
 
-        context = {'trainers': trainers, 'upcoming_birthdays': upcoming_birthdays, 'today_birthdays': today_birthdays}
+
+        context = {'trainers': trainers, 'upcoming_birthdays': upcoming_birthdays, 'today_birthdays': today_birthdays, 'trainers_search': trainers_search, 'query': query}
 
         return render(request, "trainers/trainers.html", context)
     else:
@@ -229,3 +231,11 @@ def schedule(request):
         return render(request, "trainers/schedule.html", {'activities': context})
     else:
         return HttpResponseRedirect(reverse('login_page'))
+
+#
+# def search_clients(request):
+#     query = request.GET.get('q')
+#     clients = Client.objects.filter(
+#         Q(name__icontains=query) | Q(email__icontains=query)
+#     )
+#     return render(request, 'search_clients.html', {'clients': clients})
