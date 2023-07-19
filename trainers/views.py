@@ -155,7 +155,7 @@ def trainers(request):
         trainers_search = []
         query = request.GET.get('q')
         if query:
-            trainers_search = User.objects.filter(Q(first_name__icontains=query) | Q(email__icontains=query))
+            trainers_search = Trainer.objects.filter(Q(user__first_name__icontains=query) | Q(user__email__icontains=query))
 
 
         context = {'trainers': trainers, 'upcoming_birthdays': upcoming_birthdays, 'today_birthdays': today_birthdays, 'trainers_search': trainers_search, 'query': query}

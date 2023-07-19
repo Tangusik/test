@@ -87,3 +87,12 @@ function setActiveButton(button) {
 
     button.classList.add("active");
 }
+
+// let trainer_search_div = document.getElementById("search_cards");
+// function search_trainers() {
+//     if (trainer_search_div.style.display === "none") {
+//         trainer_search_div.style.display = "block";
+//     } else {
+//         trainer_search_div.style.display = "none";
+//     }
+// }

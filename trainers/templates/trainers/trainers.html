@@ -5,28 +5,60 @@
 <link rel="stylesheet" href="../../../static/css/edit_modal.css">
 <link rel="stylesheet" href="../../../static/css/btns.css">
 <link rel="stylesheet" href="../../../static/css/search.css">
-
 {% endblock %}
 
 {% block content %}
-
 <div id="search_div">
     <h3>Поиск</h3>
     <form method="get">
         <div class="sub">
-            <input type="text" placeholder="Кого желаете найти?" name="q" value="{{ query }}">
-            <button type="submit">Найти</button>
+            <input type="text" placeholder="Кого желаете найти?" name="q" value="{{query}}">
+            <button onclick="search_trainers()" type="submit">Найти</button>
         </div>
     </form>
 </div>
+{%if trainers_search %}
+<div id="search_cards" class="cards">
+    <div class="cards_elements">
+        {% for trainer in trainers_search %}
+        <div class="card">
+            <div class="front">
+                <p>{{trainer.birthdate}}
+                    {% if trainer in upcoming_birthdays %} 🍰 {% endif %}
+                    {% if trainer in today_birthdays %} 🎂 {% endif %}
+                </p>
+                <h2>
+                    {{trainer.user.last_name}} <br> {{trainer.user.first_name}} <br> {{trainer.otchestv}}
+                </h2>
+                <p> {{trainer.status}}
+                </p>
+            </div>
+            <div class="back">
+                <p>{{trainer.birthdate}}
+                    {% if trainer in upcoming_birthdays %} 🍰 {% endif %}
+                    {% if trainer in today_birthdays %} 🎂 {% endif %}
+                </p>
+                <h2>
+                    {{trainer.user.last_name}} <br> {{trainer.user.first_name}} <br> {{trainer.otchestv}}
+                </h2>
+                <p> {% if trainer.team_set.all %}
+                <ul>
+                    {% for team in trainer.team_set.all %}
+                    <li><a href="#">{{ team.name }} </a></li>
+                    {% endfor %}
+                </ul>
 
-<ul>
-    {% for trainer in trainers_search %}
-    <li>{{ trainer.first_name }} ({{ trainer.email }})</li>
-    {% empty %}
-    <li>Клиенты не найдены</li>
-    {% endfor %}
-</ul>
+                {% else %}
+                <p>У тренера ещё нет групп.</p>
+                {% endif %}
+                </p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{%endif%}
+
 
 <div id="trainers_content">
     <button id="add_trainer_button" class="change_btn" onclick="modal_trainer()"> Добавить тренера</button>
@@ -53,10 +85,8 @@
             </div>
         </div>
     </div>
-
-
-    <div id="cards">
-        {%if trainers %}
+    {%if trainers %}
+    <div class="cards">
         <div class="cards_elements">
             {% for trainer in trainers %}
             <div class="card">
@@ -68,11 +98,11 @@
                     <h2>
                         {{trainer.user.last_name}} <br> {{trainer.user.first_name}} <br> {{trainer.otchestv}}
                     </h2>
-                    <p> Какое-нить описание
+                    <p> {{trainer.status}}
                     </p>
                 </div>
                 <div class="back">
-                     <p>{{trainer.birthdate}}
+                    <p>{{trainer.birthdate}}
                         {% if trainer in upcoming_birthdays %} 🍰 {% endif %}
                         {% if trainer in today_birthdays %} 🎂 {% endif %}
                     </p>
@@ -93,12 +123,14 @@
                 </div>
             </div>
             {% endfor %}
-            {% else %}
-            <p>Коллег нет :(</p>
-            {%endif%}
         </div>
     </div>
+    {% else %}
+    <p>Коллег нет :(</p>
+    {%endif%}
 </div>
+
+
 {% endblock %}
 
 {% block js%}
