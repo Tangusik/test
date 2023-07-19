@@ -1,0 +1,47 @@
+/*ПОИСК*/
+#search_div {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #3D5A80;
+    height: 6em;
+    width: 100%;
+    text-align: center;
+}
+
+#search_div h3 {
+    color: #dddddd;
+    padding-bottom: 0.3em;
+}
+
+.sub {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.sub input {
+    height: 3em;
+    width: 15em;
+    color: #293241;
+    text-align: center;
+    border: none;
+}
+
+.sub button {
+    border: none;
+    outline: none;
+    height: 3em;
+    width: 5em;
+    background-color: #98C1D9;
+    color: #293241;
+}
+
+@media (max-width: 900px) {
+    #search_div {
+        flex-direction: column;
+    }
+}

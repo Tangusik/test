@@ -4,21 +4,38 @@ import datetime
 from django.utils import timezone
 
 
+class ClientStatus(models.Model):
+    name = models.CharField(blank=True, max_length=30)
+
+    def __str__(self):
+        return self.name
+
+
 class Client(models.Model):
     balance = models.IntegerField(blank=False, default=0)
     first_name = models.CharField(blank=False, max_length=30, default='qwerty')
     last_name = models.CharField(blank=True, max_length=30)
     reg_date = models.DateField(auto_now=True, blank=True)
     birth_date = models.DateField(auto_now=False, blank=True, default=datetime.date(2023, 1, 1))
+    status = models.ForeignKey(ClientStatus, models.CASCADE, blank=True, null=True)
 
     def __str__(self):
         return self.first_name
+
+
+class TrainerStatus(models.Model):
+    name = models.CharField(blank=True, max_length=30)
+
+    def __str__(self):
+        return self.name
 
 
 class Trainer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     otchestv = models.CharField(blank=True, max_length=20)
     birthdate = models.DateField(auto_now=False)
+    status = models.ForeignKey(TrainerStatus, models.CASCADE, blank=True, null=True)
+
     def __str__(self):
         return self.user.first_name
 
@@ -40,11 +57,18 @@ class Parents(models.Model):
     telephone = models.CharField(blank=True, max_length=30)
 
 
+class Sport(models.Model):
+    name = models.CharField(blank=True, max_length=30)
+
+    def __str__(self):
+        return self.name
+    
+
 class Team(models.Model):
     name = models.CharField(max_length=20, default="qwerty")
     clients = models.ManyToManyField(Client)
     trainer = models.ForeignKey(Trainer, models.CASCADE, blank=True, null=True)
-    sport = models.CharField(blank=True, max_length=30, null=True)
+    sport = models.ForeignKey(Sport, models.CASCADE, blank=True, null=True)
 
     def __str__(self):
         return self.name

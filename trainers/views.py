@@ -1,7 +1,7 @@
 import datetime
-
+from datetime import date
 from django.shortcuts import render
-from .models import Client, Address, Team, Trainer, Activity
+from .models import Client, Address, Team, Trainer, Activity, Sport
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
@@ -54,14 +54,16 @@ def clients(request):
     if request.user.is_authenticated:
         clients = Client.objects.all()
         all_team = Team.objects.all()
-        teams_by_sport = Team.objects.values('sport').annotate(total=Count('id')).order_by('-total')
-        teams_by_sport_dict = {}
+        # teams_by_sport = Team.objects.values('sport').annotate(total=Count('id')).order_by('-total')
+        # teams_by_sport_dict = {}
+        # for team in teams_by_sport:
+        #     teams = Team.objects.filter(sport=team['sport'])
+        #     teams_by_sport_dict[team['sport']] = teams
+        # context = {'clients': clients, 'teams': all_team, 'teams_by_sport': teams_by_sport_dict}
 
-        for team in teams_by_sport:
-            teams = Team.objects.filter(sport=team['sport'])
-            teams_by_sport_dict[team['sport']] = teams
+        sports = Sport.objects.all()
+        context = {'clients': clients, 'teams': all_team, 'sports': sports}
 
-        context = {'clients': clients, 'teams': all_team, 'teams_by_sport': teams_by_sport_dict}
         return render(request, "trainers/clients.html", context)
     else:
         return HttpResponseRedirect(reverse('login_page'))
@@ -133,7 +135,29 @@ def team_add_action(request):
 def trainers(request):
     if request.user.is_authenticated:
         trainers = Trainer.objects.all()
-        context = {'trainers': trainers}
+
+        today = date.today()
+
+        trainers_birth = Trainer.objects.all().order_by('birthdate')
+
+        upcoming_birthdays = []
+        today_birthdays = []
+
+        for trainer in trainers_birth:
+            # вычисляем дату рождения тренера в этом году
+            birthdate_this_year = date(today.year, trainer.birthdate.month, trainer.birthdate.day)
+            if birthdate_this_year < today:
+                birthdate_this_year = date(today.year + 1, trainer.birthdate.month, trainer.birthdate.day)
+
+            # вычисляем оставшееся время до дня рождения
+            time_to_birthday = (birthdate_this_year - today).days
+            if time_to_birthday <= 7 & time_to_birthday != 0:
+                upcoming_birthdays.append(trainer)
+            if time_to_birthday == 0:
+                    today_birthdays.append(trainer)
+
+        context = {'trainers': trainers, 'upcoming_birthdays': upcoming_birthdays, 'today_birthdays': today_birthdays}
+
         return render(request, "trainers/trainers.html", context)
     else:
         return HttpResponseRedirect(reverse('login_page'))

@@ -158,14 +158,12 @@
     </div>
 
     <div id="all_sports">
-        {% for sport, teams in teams_by_sport.items %}
-        <h3>{{ sport }} ({{ teams.count }})</h3>
-        <ul>
-            {% for team in teams %}
-            <li>{{ team.name }}</li>
-            {% endfor %}
-        </ul>
-        {% endfor %}
+        {% for sport in sports %}
+          <details>
+                <summary> {{ sport.name }} ({{ sport.team_set.all.count }})
+                </summary>
+          </details>
+         {% endfor %}
     </div>
 </div>
 

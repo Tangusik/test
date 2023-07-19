@@ -4,10 +4,21 @@
 <link rel="stylesheet" href="../../../static/css/form.css">
 <link rel="stylesheet" href="../../../static/css/edit_modal.css">
 <link rel="stylesheet" href="../../../static/css/btns.css">
+<link rel="stylesheet" href="../../../static/css/search.css">
 
 {% endblock %}
 
 {% block content %}
+
+<div id="search_div">
+    <h3>Поиск</h3>
+    <div class="sub">
+        <input type="text" placeholder="Кого желаете найти?">
+        <button>Найти</button>
+    </div>
+</div>
+
+
 <div id="trainers_content">
     <button id="add_trainer_button" class="change_btn" onclick="modal_trainer()"> Добавить тренера</button>
     <div class="modal" id="modal_trainer">
@@ -33,13 +44,15 @@
             </div>
         </div>
     </div>
+
+
     <div id="cards">
         {%if trainers %}
         <div class="cards_elements">
             {% for trainer in trainers %}
             <div class="card">
                 <div class="front">
-                    <p> {{trainer.birthdate}}</p>
+                    <p>{{trainer.birthdate}} {% if trainer in upcoming_birthdays %} 🍰 {% endif %} {% if trainer in today_birthdays %} 🎂 {% endif %}</p>
                     <h2>
                         {{trainer.user.last_name}} <br> {{trainer.user.first_name}} <br> {{trainer.otchestv}}
                     </h2>
@@ -47,7 +60,7 @@
                     </p>
                 </div>
                 <div class="back">
-                    <p> {{trainer.birthdate}}</p>
+                    <p>{{trainer.birthdate}} {% if trainer in upcoming_birthdays %} 🍰 {% endif %} {% if trainer in today_birthdays %} 🎂 {% endif %}</p>
                     <h2>
                         {{trainer.user.last_name}} <br> {{trainer.user.first_name}} <br> {{trainer.otchestv}}
                     </h2>
