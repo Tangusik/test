@@ -7,8 +7,7 @@
 
 #trainers_content {
     padding-top: 1em;
-    padding-bottom: 1em;
-    min-height: 45em;
+    padding-bottom: 2em;
     background-color: rgb(152, 193, 217, 0.7);
 }
 
@@ -51,8 +50,3 @@
     display: block;
     margin: 0 auto;
 }
-
-
-/*#search_cards{*/
-/*    display: none;*/
-/*}*/

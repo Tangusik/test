@@ -16,11 +16,13 @@
     </div>
     <div class="container-text">
         <h3>{{userinfo.last_name}} {{userinfo.first_name}} {{trainer.otchestv}}</h3>
-        <h5>{{userinfo.email}}</h5>
-        {% if is_trainer %}
+          {% if is_trainer %}
         <h4>Тренер</h4>
         {% endif %}
+        <br>
+        <h4>{{userinfo.email}}</h4>
         <h4>{{trainer.birthdate}}</h4>
+        <h4>{{trainer.status}}</h4>
         <button class="change_btn" style="margin-top: 30px" onclick="edit_data_modal()">Редактировать</button>
     </div>
 </div>
