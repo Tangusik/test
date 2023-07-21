@@ -1,80 +1,49 @@
-function showGroupForm() {
-    var form = document.getElementById("form_add_team");
-    if (form.style.display === "none") {
-        form.style.display = "block";
-    } else {
-        form.style.display = "none";
-    }
-}
-
-
-function showClientForm() {
-    var form = document.getElementById("form_add_client");
-    if (form.style.display === "none") {
-        form.style.display = "block";
-    } else {
-        form.style.display = "none";
-    }
-}
-
-
-function showTrainerForm() {
-    var form = document.getElementById("form_add_trainer");
-    if (form.style.display === "none") {
-        form.style.display = "block";
-    } else {
-        form.style.display = "none";
-    }
-}
-
-
 var clients = document.getElementById("all_clients");
 var groups = document.getElementById("all_groups");
 var sports = document.getElementById("all_sports");
 
+
 function showAllClients() {
-    if (clients.style.display === "none") {
-        clients.style.display = "block";
-        groups.style.display = "none";
-        sports.style.display = "none";
+  if (clients.classList.contains("hidden")) {
+    clients.classList.remove("hidden");
+    groups.classList.add("hidden");
+    sports.classList.add("hidden");
 
-        let button = document.getElementById("all_clients_btn");
-        setActiveButton(button);
-
-    } else {
-        clients.style.display = "none";
-    }
+    let button = document.getElementById("all_clients_btn");
+    setActiveButton(button);
+  } else {
+    clients.classList.add("hidden");
+  }
 }
 
 
-function showAllGroups() {
-    if (groups.style.display === "none") {
-        groups.style.display = "block";
-        clients.style.display = "none";
-        sports.style.display = "none";
+function showAllGroups(){
+  if (groups.classList.contains("hidden")) {
+    groups.classList.remove("hidden");
+    clients.classList.add("hidden");
+    sports.classList.add("hidden");
 
-        let button = document.getElementById("all_groups_btn");
-        setActiveButton(button);
-
-    } else {
-        groups.style.display = "none";
-    }
+    let button = document.getElementById("all_groups_btn");
+    setActiveButton(button);
+  } else {
+    groups.classList.add("hidden");
+  }
 }
 
 
-function showAllSports() {
-    if (sports.style.display === "none") {
-        sports.style.display = "block";
-        groups.style.display = "none";
-        clients.style.display = "none";
+function showAllSports()  {
+  if (sports.classList.contains("hidden")) {
+    sports.classList.remove("hidden");
+    groups.classList.add("hidden");
+    clients.classList.add("hidden");
 
-        let button = document.getElementById("all_sports_btn");
-        setActiveButton(button);
-
-    } else {
-        sports.style.display = "none";
-    }
+    let button = document.getElementById("all_sports_btn");
+    setActiveButton(button);
+  } else {
+    sports.classList.add("hidden");
+  }
 }
+
 
 function setActiveButton(button) {
     let buttons = document.querySelectorAll(".change_btn");
@@ -84,6 +53,5 @@ function setActiveButton(button) {
             btn.classList.remove("active");
         }
     });
-
     button.classList.add("active");
 }

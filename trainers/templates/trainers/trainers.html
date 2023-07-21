@@ -60,8 +60,15 @@
 {%endif%}
 
 
+<div class="sort">
+    <h3>Сортировать по:</h3>
+    <button class="change_btn">Статусу</button>
+    <button class="change_btn">Виду спорта</button>
+    <button class="change_btn">Загружености</button>
+</div>
+
 <div id="trainers_content">
-    <button id="add_trainer_button" class="change_btn" onclick="modal_trainer()"> Добавить тренера</button>
+    <button class="change_btn add_button" onclick="modal_trainer()"> Добавить тренера</button>
     <div class="modal" id="modal_trainer">
         <div class="modal-content">
             <div class="close" id="close_trainer">&times;</div>

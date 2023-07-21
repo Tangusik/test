@@ -1,14 +1,7 @@
 .cards {
     overflow: hidden;
-    /*height: 100%;*/
     width: 100%;
     min-height: 300px;
-    /*display: flex;*/
-    /*flex-direction: row;*/
-    /*justify-content: space-around;*/
-    /*align-items: center;*/
-    /*flex-wrap: wrap;*/
-    /*text-align: center;*/
 }
 
 .cards_elements {
@@ -18,6 +11,7 @@
     align-items: flex-start;
     flex-wrap: wrap;
     height: 100%;
+    margin-bottom: 1em;
 }
 
 .card {
@@ -76,12 +70,21 @@
 
 summary {
     color: #3c3c3c;
-    padding-left: 20px;
-    margin-top: 20px;
-    margin-left: 50px;
+    margin-top: 1em;
+    margin-left: 5em;
     font-size: 20px;
     list-style: none;
+    font-weight: bold;
 !important;
+}
+
+.list{
+    margin-top: 0.5em;
+      margin-left: 6.3em;
+}
+
+.list li{
+    color: #3c3c3c;
 }
 
 .add_group {
@@ -92,6 +95,20 @@ summary {
 #search_cards{
        padding-bottom: 2em;
 }
+
+.sort{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgb(152, 193, 217, 0.7);
+    padding-top: 1em;
+}
+
+.sort h3{
+        color: #293241;
+}
+
 
 @media (max-width: 1150px) {
     .card {

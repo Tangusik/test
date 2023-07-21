@@ -1,15 +1,16 @@
 import datetime
 from datetime import date
 from django.shortcuts import render
-from .models import Client, Address, Team, Trainer, Activity, Sport
+from .models import Client, Team, Trainer, Activity, Sport, News
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from django.db.models import Count
 from django.shortcuts import get_object_or_404
 import json
 from django.db.models import Q
+from django.utils import timezone
+from django.db.models import Count
 
 
 
@@ -36,8 +37,11 @@ def log_out(request):
     return HttpResponseRedirect(reverse('login_page'))
 
 
+
 def main(request):
     if request.user.is_authenticated:
+        news = News.objects.filter(pub_date__lte=timezone.now(), expiry_date__gt=timezone.now())
+
         user = request.user
         try:
             trainer = Trainer.objects.get(user=user)
@@ -45,7 +49,7 @@ def main(request):
         except Trainer.DoesNotExist:
             trainer = None
             is_trainer = False
-        context = {'userinfo': user, 'trainer': trainer, 'is_trainer': is_trainer}
+        context = {'userinfo': user, 'trainer': trainer, 'is_trainer': is_trainer, 'news': news}
         return render(request, 'trainers/main.html', context)
     else:
         return HttpResponseRedirect(reverse('login_page'))
@@ -54,16 +58,12 @@ def main(request):
 def clients(request):
     if request.user.is_authenticated:
         clients = Client.objects.all()
-        all_team = Team.objects.all()
-        # teams_by_sport = Team.objects.values('sport').annotate(total=Count('id')).order_by('-total')
-        # teams_by_sport_dict = {}
-        # for team in teams_by_sport:
-        #     teams = Team.objects.filter(sport=team['sport'])
-        #     teams_by_sport_dict[team['sport']] = teams
-        # context = {'clients': clients, 'teams': all_team, 'teams_by_sport': teams_by_sport_dict}
+        teams = Team.objects.all()
 
-        sports = Sport.objects.all()
-        context = {'clients': clients, 'teams': all_team, 'sports': sports}
+        sports = Sport.objects.annotate(team_count=Count('team'))
+
+
+        context = {'clients': clients, 'teams': teams, 'sports': sports}
 
         return render(request, "trainers/clients.html", context)
     else:
@@ -142,11 +142,11 @@ def trainers(request):
         upcoming_birthdays = []
         today_birthdays = []
         for trainer in trainers_birth:
-            # вычисляем дату рождения тренера в этом году
+            #дата> рождения тренера в этом году
             birthdate_this_year = date(today.year, trainer.birthdate.month, trainer.birthdate.day)
             if birthdate_this_year < today:
                 birthdate_this_year = date(today.year + 1, trainer.birthdate.month, trainer.birthdate.day)
-            # вычисляем оставшееся время до дня рождения
+            #оставшееся время до дня рождения
             time_to_birthday = (birthdate_this_year - today).days
             if time_to_birthday <= 7 & time_to_birthday != 0:
                 upcoming_birthdays.append(trainer)
@@ -231,11 +231,3 @@ def schedule(request):
         return render(request, "trainers/schedule.html", {'activities': context})
     else:
         return HttpResponseRedirect(reverse('login_page'))
-
-#
-# def search_clients(request):
-#     query = request.GET.get('q')
-#     clients = Client.objects.filter(
-#         Q(name__icontains=query) | Q(email__icontains=query)
-#     )
-#     return render(request, 'search_clients.html', {'clients': clients})

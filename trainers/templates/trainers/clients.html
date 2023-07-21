@@ -15,8 +15,8 @@
         <button id="all_sports_btn" class="change_btn" onclick="showAllSports()">Вид спорта</button>
     </div>
 
-    <div id="all_clients">
-        <button class="change_btn" onclick="modal_client()">Добавить клиента</button>
+    <div id="all_clients" class="hidden">
+        <button class="change_btn add_button" onclick="modal_client()">Добавить клиента</button>
         <div class="modal" id="modal_client">
             <div class="modal-content">
                 <div class="close" id="close_client">&times;</div>
@@ -70,8 +70,8 @@
         </div>
     </div>
 
-    <div id="all_groups">
-        <button class="change_btn" onclick="modal_group()"> Создать группу</button>
+    <div id="all_groups" class="hidden">
+        <button class="change_btn add_button" onclick="modal_group()"> Создать группу</button>
         <div class="modal" id="modal_group">
             <div class="modal-content">
                 <div class="close" id="close_group">&times;</div>
@@ -157,13 +157,21 @@
         </div>
     </div>
 
-    <div id="all_sports">
+    <div id="all_sports" class="hidden">
         {% for sport in sports %}
-          <details>
-                <summary> {{ sport.name }} ({{ sport.team_set.all.count }})
-                </summary>
-          </details>
-         {% endfor %}
+        <details>
+            <summary> {{ sport.name }} ({{ sport.team_set.all.count }})
+            </summary>
+            {% for t in teams%}
+            {%if sport.name == t.sport.name %}
+            <ul class="list">
+                <li>{{ t.name }}</li>
+            </ul>
+             {%endif%}
+               {% endfor %}
+        </details>
+        {% endfor %}
+
     </div>
 </div>
 

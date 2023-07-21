@@ -110,25 +110,14 @@
 </div>
 
 <div class="slider">
-    <h3 class="name">Листающиеся новости</h3>
+    {% for new in news %}
     <div class="slider-field">
+        <h2 class="name">{{new.title}}</h2>
         <div class="slider-text">
-            <h4>Заголовок1</h4>
-            <p>Тут какой-то текст</p>
+            <h3>{{new.text}}</h3>
         </div>
     </div>
-    <div class="slider-field">
-        <div class="slider-text">
-            <h4>Заголовок2</h4>
-            <p>Другой текст</p>
-        </div>
-    </div>
-    <div class="slider-field">
-        <div class="slider-text">
-            <h4>Заголовок3</h4>
-            <p>И еще один текст</p>
-        </div>
-    </div>
+     {% endfor %}
     <button class="prevSlider">Prev</button>
     <button class="nextSlider">Next</button>
 </div>

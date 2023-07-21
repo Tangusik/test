@@ -25,17 +25,10 @@
     margin-bottom: 4em;
 }
 
-#all_clients {
-    display: none;
+.hidden {
+  display: none;
 }
 
-#all_groups {
-    display: none;
-}
-
-#all_sports {
-    display: none;
-}
 
 .teams_btn {
     padding-top: 3em;
@@ -46,7 +39,7 @@
     padding-bottom: 2em;
 }
 
-#add_trainer_button{
+.add_button{
     display: block;
     margin: 0 auto;
 }

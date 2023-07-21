@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 import datetime
-from django.utils import timezone
 
 
 class ClientStatus(models.Model):
@@ -103,9 +102,6 @@ class News(models.Model):
 
     def __str__(self):
         return self.title
-
-    def is_expired(self):
-        return timezone.now() > self.expiry_date
 
     class Meta:
         ordering = ['-pub_date']
