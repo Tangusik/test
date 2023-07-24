@@ -29,11 +29,19 @@ class TrainerStatus(models.Model):
         return self.name
 
 
+class Sport(models.Model):
+    name = models.CharField(blank=True, max_length=30)
+
+    def __str__(self):
+        return self.name
+
+
 class Trainer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     otchestv = models.CharField(blank=True, max_length=20)
     birthdate = models.DateField(auto_now=False)
     status = models.ForeignKey(TrainerStatus, models.CASCADE, blank=True, null=True)
+    sports = models.ManyToManyField(Sport)
 
     def __str__(self):
         return self.user.first_name
@@ -56,12 +64,6 @@ class Parents(models.Model):
     telephone = models.CharField(blank=True, max_length=30)
 
 
-class Sport(models.Model):
-    name = models.CharField(blank=True, max_length=30)
-
-    def __str__(self):
-        return self.name
-    
 
 class Team(models.Model):
     name = models.CharField(max_length=20, default="qwerty")

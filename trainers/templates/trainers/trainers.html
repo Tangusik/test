@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="../../../static/css/edit_modal.css">
 <link rel="stylesheet" href="../../../static/css/btns.css">
 <link rel="stylesheet" href="../../../static/css/search.css">
+<link rel="stylesheet" href="../../../static/css/list.css">
 {% endblock %}
 
 {% block content %}
@@ -60,15 +61,56 @@
 {%endif%}
 
 
-<div class="sort">
-    <h3>Сортировать по:</h3>
-    <button class="change_btn">Статусу</button>
-    <button class="change_btn">Виду спорта</button>
-    <button class="change_btn">Загружености</button>
-</div>
-
 <div id="trainers_content">
-    <button class="change_btn add_button" onclick="modal_trainer()"> Добавить тренера</button>
+    <nav>
+        <ul class="dropdown">
+            <li class="drop"><a href="{% url 'trainers' %}">Cтатус</a>
+                <ul class="sub_menu">
+                    {% for st in status %}
+                    <li><a href="{% url 'trainers' %}?status={{ st.name }}">{{st.name}}</a></li>
+                    {% endfor %}
+                </ul>
+            </li>
+            <li class="drop"><a href="#">Вид спорта</a>
+                <ul class="sub_menu">
+                    {% for sp in sport%}
+                    <li><a href="{% url 'trainers' %}?sports={{ sp.name }}">{{sp.name}}</a></li>
+                    {% endfor %}
+                </ul>
+            </li>
+            <!--        	<li class="drop"><a href="#">Загруженость на неделе</a>-->
+            <!--        		<ul class="sub_menu">-->
+            <!--							<li><a href="#">Большая занятость</a></li>-->
+            <!--							<li><a href="#">Средняя занятость</a></li>-->
+            <!--							<li><a href="#">Маленькая занятость</a></li>-->
+            <!--        		</ul>-->
+            <!--        	</li>-->
+        </ul>
+    </nav>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <button id="add_trainer" class="change_btn add_button" onclick="modal_trainer()"> Добавить тренера</button>
     <div class="modal" id="modal_trainer">
         <div class="modal-content">
             <div class="close" id="close_trainer">&times;</div>
@@ -107,6 +149,10 @@
                     </h2>
                     <p> {{trainer.status}}
                     </p>
+                    <br>
+                    {% for sp in trainer.sports.all %}
+                    {{sp.name}}
+                    {% endfor %}
                 </div>
                 <div class="back">
                     <p>{{trainer.birthdate}}
@@ -154,4 +200,5 @@
     }
 </script>
 <script src="../../../static/js/buttons.js"></script>
+<script src="../../../static/js/ddd.js"></script>
 {% endblock %}

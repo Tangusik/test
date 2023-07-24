@@ -6,6 +6,7 @@
 }
 
 #trainers_content {
+    min-height: 30em;
     padding-top: 1em;
     padding-bottom: 2em;
     background-color: rgb(152, 193, 217, 0.7);
@@ -42,4 +43,8 @@
 .add_button{
     display: block;
     margin: 0 auto;
+}
+
+#add_trainer{
+    margin-top: 20px;
 }

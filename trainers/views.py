@@ -1,7 +1,7 @@
 import datetime
 from datetime import date
 from django.shortcuts import render
-from .models import Client, Team, Trainer, Activity, Sport, News
+from .models import Client, Team, Trainer, Activity, Sport, News, TrainerStatus
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
@@ -136,6 +136,16 @@ def team_add_action(request):
 def trainers(request):
     if request.user.is_authenticated:
         trainers = Trainer.objects.all()
+        sport = Sport.objects.all()
+        status = TrainerStatus.objects.all()
+
+        if request.GET.get('status'):
+            trainers = trainers.filter(status__name=request.GET.get('status'))
+
+        if request.GET.get('sports'):
+            trainers = trainers.filter(sports__name=request.GET.get('sports'))
+
+
 
         today = date.today()
         trainers_birth = Trainer.objects.all().order_by('birthdate')
@@ -157,12 +167,12 @@ def trainers(request):
         if query:
             trainers_search = Trainer.objects.filter(Q(user__first_name__icontains=query) | Q(user__email__icontains=query))
 
-
-        context = {'trainers': trainers, 'upcoming_birthdays': upcoming_birthdays, 'today_birthdays': today_birthdays, 'trainers_search': trainers_search, 'query': query}
+        context = {'trainers': trainers, 'status': status, 'sport': sport, 'upcoming_birthdays': upcoming_birthdays, 'today_birthdays': today_birthdays, 'trainers_search': trainers_search, 'query': query}
 
         return render(request, "trainers/trainers.html", context)
     else:
         return HttpResponseRedirect(reverse('login_page'))
+
 
 
 def trainers_add_action(request):
